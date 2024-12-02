@@ -19,7 +19,7 @@ export const error = {
     "EMAIL_EXIST" : "* 중복된 이메일 입니다.",
     "EMAIL_BLANK" : "* 이메일을 입력해주세요.",
     "PASSWORD_BLANK" : "* 비밀번호를 입력해주세요.",
-    "PASSWORD_INVALID" : "* 비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 특수문자를 각각 최소 1개 포함해야 합니다.",
+    "PASSWORD_INVALID" : "* 비밀번호는 8자 이상, 20자 이하이며, \n 대문자, 소문자, 특수문자를 각각 최소 1개 포함해야 합니다.",
     "PASSWORD_NOT_MATCH" : "* 비밀번호가 다릅니다.",
     "FAILED_LOGIN" : "* 입력하신 계정 정보가 정확하지 않았습니다.",
     "CHECK_PASSWORD_BLANK" : "* 비밀번호를 한번 더 입력해주세요",

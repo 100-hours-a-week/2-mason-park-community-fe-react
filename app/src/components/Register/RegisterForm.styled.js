@@ -20,7 +20,7 @@ const S = {
     `,
     TextInputWrapper: styled.div`
         width: 360px;
-        min-height: 80px;
+        min-height: 95px;
         display: flex;
         flex-direction: column;
     `

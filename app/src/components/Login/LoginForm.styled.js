@@ -17,6 +17,12 @@ const S = {
         font-weight: 400;
         cursor: pointer;
         margin: 5px 0;
+    `,
+    TextInputWrapper: styled.div`
+        width: 360px;
+        min-height: 90px;
+        display: flex;
+        flex-direction: column;
     `
 }
 

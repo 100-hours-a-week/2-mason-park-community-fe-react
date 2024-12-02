@@ -44,6 +44,10 @@ const GlobalStyles = createGlobalStyle`
         outline: none;
     }
     
+    span {
+        white-space: pre-line;
+    }
+    
 `;
 
 export default GlobalStyles;
