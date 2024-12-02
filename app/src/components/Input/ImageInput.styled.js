@@ -27,10 +27,13 @@ const S = {
         background-color: #c4c4c4;
         border-radius: 50%;
         overflow: hidden;
+        cursor: pointer;
     `,
-    Image: styled.image`
-    
+    Image: styled.img`
+        width: 150px;
+        height: 150px;
     `,
+
     NoImage: styled(FaPlus)`
         width: 35px;
         height: 35px;

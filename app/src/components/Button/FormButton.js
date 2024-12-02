@@ -1,9 +1,9 @@
 import S from './FormButton.styled';
 
-const FormButton = ({title, handler, disabled}) => {
+const FormButton = ({title, disabled, onClick}) => {
 
     return (
-        <S.Button onClick={handler} disabled={disabled}>
+        <S.Button onClick={onClick} disabled={disabled}>
             {title}
         </S.Button>
     )

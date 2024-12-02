@@ -4,7 +4,7 @@ const S = {
     Wrapper: styled.div`
         width: 600px;
         min-height: calc(100vh - 104px);
-        padding-top: 50px;
+        padding: 50px 0;
         
         display: flex;
         justify-content: center;
