@@ -42,11 +42,6 @@ const S = {
     Input: styled.input`
         display: none;
     `,
-    Helper: styled.div`
-        font-size: 12px;
-        font-weight: 400;
-        color: #FF0000;
-    `
 
 }
 

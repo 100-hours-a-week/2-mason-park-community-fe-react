@@ -43,6 +43,7 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
 
     // 입력 값에 따라 검증 함수를 실행하는 함수를 정의
     const runValidator = useCallback(() => {
+
         // 폼을 전부 다 입력한 경우
         if (Object.values(values).every(v => v)) {
             setDisabled(false);
@@ -51,7 +52,7 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
         }
 
         return validate(values)
-    }, [values, validate])
+    }, [values])
 
     useEffect(() => {
         const errors = runValidator();

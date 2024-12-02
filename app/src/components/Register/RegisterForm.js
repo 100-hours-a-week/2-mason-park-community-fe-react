@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 import ImageInput from "../Input/ImageInput";
 import useForm from "../../hooks/useForm";
 import {error, validator} from "../../utils/utils";
+import HelperMessage from "../common/HelperMessage";
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -61,6 +62,7 @@ const RegisterForm = () => {
                 errors.nickname = error.NICKNAME_EXCEED_MAX_LEN
             } else {
                 // TODO : 닉네임 중복 검사
+                errors.nickname = error.BLANK;
             }
 
             return errors;
@@ -73,48 +75,58 @@ const RegisterForm = () => {
     return (
         <S.Wrapper>
             <S.Title>회원가입</S.Title>
+
             <ImageInput
                 title={"프로필 사진"}
                 name={"profileImage"}
             />
-            <TextInput
-                title={"이메일*"}
-                name={"email"}
-                value={values.email}
-                error={errors.email}
-                touched={touched.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-            />
-            <TextInput
-                type={"password"}
-                title={"비밀번호*"}
-                name={"password"}
-                value={values.password}
-                error={errors.password}
-                touched={touched.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-            />
-            <TextInput
-                type={"password"}
-                title={"비밀번호 확인*"}
-                name={"passwordCheck"}
-                value={values.passwordCheck}
-                error={errors.passwordCheck}
-                touched={touched.passwordCheck}
-                onChange={handleChange}
-                onBlur={handleBlur}
-            />
-            <TextInput
-                title={"닉네임*"}
-                name={"nickname"}
-                value={values.nickname}
-                error={errors.nickname}
-                touched={touched.nickname}
-                onChange={handleChange}
-                onBlur={handleBlur}
-            />
+
+            <S.TextInputWrapper>
+                <TextInput
+                    title={"이메일*"}
+                    name={"email"}
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                />
+                <HelperMessage touched={touched.email} error={errors.email} />
+            </S.TextInputWrapper>
+
+            <S.TextInputWrapper>
+                <TextInput
+                    type={"password"}
+                    title={"비밀번호*"}
+                    name={"password"}
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                />
+                <HelperMessage touched={touched.password} error={errors.password} />
+            </S.TextInputWrapper>
+
+            <S.TextInputWrapper>
+                <TextInput
+                    type={"password"}
+                    title={"비밀번호 확인*"}
+                    name={"passwordCheck"}
+                    value={values.passwordCheck}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                />
+                <HelperMessage touched={touched.passwordCheck} error={errors.passwordCheck} />
+            </S.TextInputWrapper>
+
+            <S.TextInputWrapper>
+                <TextInput
+                    title={"닉네임*"}
+                    name={"nickname"}
+                    value={values.nickname}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                />
+                <HelperMessage touched={touched.nickname} error={errors.nickname} />
+            </S.TextInputWrapper>
+
             <FormButton
                 title={"회원가입"}
                 disabled={disabled}

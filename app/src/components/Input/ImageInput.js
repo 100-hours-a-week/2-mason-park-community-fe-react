@@ -1,4 +1,5 @@
 import S from './ImageInput.styled'
+import SC from '../common/common.styled'
 import { useRef, useState } from "react";
 import {error} from "../../utils/utils";
 
@@ -28,7 +29,7 @@ const ImageInput = ({title, name, type="file"}) => {
     return (
         <S.Wrapper>
             <S.Label>{title}</S.Label>
-            { !imageUrl && <S.Helper>{error.PROFILE_IMG_BLANK}</S.Helper>}
+            { !imageUrl && <SC.Helper>{error.PROFILE_IMG_BLANK}</SC.Helper>}
             <S.ImageBox onClick={openInput}>
                 { imageUrl ? (<S.Image src={imageUrl} />) : (<S.NoImage/>)}
                 <S.Input name={name} type={type} accept={'image/png, image/jpg, image/jpeg'} ref={fileInputRef} onChange={addImage} />

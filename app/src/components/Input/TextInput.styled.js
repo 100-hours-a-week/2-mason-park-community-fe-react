@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 const S = {
     Wrapper: styled.div`
-        width: 360px;
-        min-height: 80px;
+        width: 100%;
         display: flex;
         flex-direction: column;
     `,
@@ -21,12 +20,6 @@ const S = {
         padding: 0 10px;
         margin-bottom: 5px;
     `,
-    Helper: styled.div`
-        font-size: 12px;
-        font-weight: 400;
-        color: #FF0000;
-    `
-
 }
 
 export default S;
