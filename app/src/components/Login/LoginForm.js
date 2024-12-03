@@ -76,7 +76,7 @@ const LoginForm = () => {
                 if (meRes.status !== 200) return;
 
                 setUser(meRes.data);
-                navigate('/posts');
+                navigate('/');
             } catch (e) {
                 console.error(`${e.response.data.error} : ${e.response.data.message}`);
                 setErrors((prev) => {
