@@ -4,7 +4,7 @@ import {atom} from "jotai";
 export const userAtom = atom(null);
 
 /* 에러 전역 상태 */
-export const loginErrorAtom = atom({
+export const commonErrorAtom = atom({
     error: ''
 })
 

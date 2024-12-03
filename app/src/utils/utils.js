@@ -30,6 +30,8 @@ export const error = {
     "NICKNAME_EXCEED_MAX_LEN" : "* 닉네임은 최대 10자 까지 작성 가능합니다.",
     "PROFILE_IMG_BLANK" : "* 프로필 사진을 추가해주세요.",
     "TITLE_CONTENT_BLANK" : "* 제목, 내용을 모두 작성해주세요.",
+    "TITLE_EXCEED_MAX_LEN" : "* 제목은 최대 26자 까지 작성 가능합니다.",
+    "CONTENT_EXCEED_MAX_LEN" : "* 제목은 최대 1500자 까지 작성 가능합니다.",
 }
 
 export const validator = {
@@ -48,9 +50,9 @@ export const validator = {
         return /^[가-힣a-zA-Z0-9]{2,10}$/.test(value);
     },
     postTitle(value) {
-        return 0 < value.length && value.length <= 26;
+        return 0 <= value.length && value.length <= 26;
     },
     postContent(value) {
-        return 0 < value.length && value.length <= 1500;
+        return 0 <= value.length && value.length <= 1500;
     }
 }

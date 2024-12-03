@@ -11,7 +11,7 @@ const PostListPage = () => {
                 안녕하세요, <br/>
                 아무 말 대잔치 게시판 입니다.
             </S.Title>
-            <CommonButton title={"게시글 작성"} handler={() => navigate('/write')}/>
+            <CommonButton title={"게시글 작성"} handler={() => navigate('/posts/write')}/>
         </S.Wrapper>
     );
 }
