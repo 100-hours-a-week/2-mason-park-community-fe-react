@@ -5,7 +5,7 @@ import {error, validator} from "../../utils/utils";
 import useForm from "../../hooks/useForm";
 import HelperMessage from "../common/HelperMessage";
 import {useAtom} from "jotai";
-import {commonErrorAtom as errorAtom, userAtom} from "../../store/atoms";
+import {commonErrorAtom as errorAtom} from "../../store/atoms";
 import TitleInput from "../Input/TitleInput";
 import ContentInput from "../Input/ContentInput";
 import FileInput from "../Input/FileInput";
