@@ -1,10 +1,13 @@
 import S from './RegisterPage.styled';
 import RegisterForm from "./RegisterForm";
+import {Provider} from "jotai";
 
 const RegisterPage = () => {
     return (
         <S.Wrapper>
-            <RegisterForm/>
+            <Provider>
+                <RegisterForm/>
+            </Provider>
         </S.Wrapper>
     )
 }

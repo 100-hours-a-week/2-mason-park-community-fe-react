@@ -20,9 +20,7 @@ const ImageInput = ({title, name, type="file"}) => {
         reader.readAsDataURL(file);
         reader.onloadend = (e) => {
             setImageUrl(reader.result);
-
-            // TODO : 로컬 스토리지 저장
-            // TODO : 이미지 등록
+            localStorage.setItem('profileImage', reader.result);
         }
     }
 

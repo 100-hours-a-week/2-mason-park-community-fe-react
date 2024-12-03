@@ -2,10 +2,10 @@ import {useCallback, useEffect, useState} from "react";
 
 const useForm = ({ initialValues, validate, onSubmit}) => {
     const [values, setValues] = useState(initialValues);
-    const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
     const [disabled, setDisabled] = useState(true);
 
+    // 필드 입력값 추출
     const handleChange = (e) => {
         setValues({
             ...values,
@@ -13,6 +13,7 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
         });
     }
 
+    // blur check
     const handleBlur = (e) => {
         setTouched({
             ...touched,
@@ -20,7 +21,8 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
         })
     }
 
-    const handleSubmit = (e) => {
+    // 폼 제출 전 처리
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // 모든 필드에 방문표시
@@ -32,16 +34,15 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
         )
 
         const errors = validate(values)
-        setErrors(errors)
         if (Object.values(errors).some(v => v)) {
             return;
         }
 
-        onSubmit(values)
+        await onSubmit(values)
     }
 
 
-    // 입력 값에 따라 검증 함수를 실행하는 함수를 정의
+    // 포커스 아웃될 때 검증 함수를 실행하는 함수를 정의
     const runValidator = useCallback(() => {
 
         // 폼을 전부 다 입력한 경우
@@ -52,16 +53,19 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
         }
 
         return validate(values)
-    }, [values])
+    }, [touched])
 
     useEffect(() => {
-        const errors = runValidator();
-        setErrors(errors);
+
+        const run = async () => {
+            await runValidator();
+        }
+        run();
+
     }, [runValidator])
 
     return {
         values,
-        errors,
         touched,
         disabled,
         handleChange,
