@@ -5,46 +5,87 @@ import {useNavigate} from "react-router-dom";
 import {error, validator} from "../../utils/utils";
 import useForm from "../../hooks/useForm";
 import HelperMessage from "../common/HelperMessage";
+import {useAtom, useSetAtom} from "jotai";
+import {login} from "../../api/auth";
+import {getMyProfile} from "../../api/user";
+import {userAtom, loginErrorAtom as errorAtom} from "../../store/atoms";
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const { values, errors, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
+    const [errors, setErrors] = useAtom(errorAtom);
+    const setUser= useSetAtom(userAtom);
+    const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
         initialValues: {
             email: "",
             password: "",
         },
-        validate: values => {
-            const errors = {
-                error: ''
-            };
+        validate:  values => {
 
-            // 이메일 유효성 검사
+            // 이메일 유효성 검사 : 입력
             if (!values.email) {
-                errors.error = error.EMAIL_BLANK;
-            } else if (!validator.email(values.email)) {
-                errors.error = error.EMAIL_INVALID;
-            } else {
-                errors.email = error.BLANK;
+                setErrors((prev) => {
+                    return {...prev, error: error.EMAIL_BLANK}
+                });
+            }
+            // 이메일 유효성 검사 : 정규식
+            else if (!validator.email(values.email)) {
+                setErrors((prev) => {
+                    return {...prev, error: error.EMAIL_INVALID }
+                });
+            }
+            // 이메일 유효성 검사 : 중복
+            else {
+                setErrors((prev) => {
+                    return {...prev, error: error.BLANK }
+                });
             }
 
             if (!values.email || !validator.email(values.email)) return errors;
 
-            // 비밀번호 유효성 검사
+            // 비밀번호 유효성 검사 : 입력
             if (!values.password) {
-                errors.error = error.PASSWORD_BLANK;
-            } else if (!validator.password(values.password)) {
-                errors.error = error.PASSWORD_INVALID;
-            } else {
-                errors.error = error.BLANK;
+                setErrors((prev) => {
+                    return {...prev, error: error.PASSWORD_BLANK }
+                });
+            }
+            // 비밀번호 유효성 검사 : 정규식
+            else if (!validator.password(values.password)) {
+                setErrors((prev) => {
+                    return {...prev, error: error.PASSWORD_INVALID }
+                });
+            }
+            // 비밀번호 유효성 검사 : 통과
+            else {
+                setErrors((prev) => {
+                    return {...prev, error: error.BLANK }
+                });
             }
 
             return errors;
         },
-        onSubmit: values => {
-            // TODO : 로그인 요청
+        onSubmit: async values => {
+            try {
+                const loginRes = await login({
+                    ...values,
+                    password: window.btoa(values.password)
+                })
+
+                if (loginRes.status !== 200) return;
+
+                const meRes = await getMyProfile();
+                if (meRes.status !== 200) return;
+
+                setUser(meRes.data);
+                navigate('/posts');
+            } catch (e) {
+                console.error(`${e.response.data.error} : ${e.response.data.message}`);
+                setErrors((prev) => {
+                    return {...prev, error: e.response.data.message }
+                });
+            }
         }
     })
-
+    
     return (
         <S.Wrapper>
             <S.Title>로그인</S.Title>

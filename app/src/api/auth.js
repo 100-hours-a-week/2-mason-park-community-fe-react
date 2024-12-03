@@ -1,5 +1,17 @@
 import axios from "axios";
 
+export const login = async (data) => {
+    return await axios.request({
+        method: "POST",
+        url: "http://localhost:8080/api/auth/login",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        withCredentials: true,
+        data: data,
+    })
+}
+
 export const register = async (data) => {
     return await axios.request({
         method: 'POST',

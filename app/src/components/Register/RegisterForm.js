@@ -8,7 +8,7 @@ import {error, validator} from "../../utils/utils";
 import HelperMessage from "../common/HelperMessage";
 import {existEmail, existNickname, register} from "../../api/auth";
 import {useAtom} from "jotai";
-import {errorAtom} from "../../store/register";
+import {registerErrorAtom as errorAtom} from "../../store/atoms";
 
 const RegisterForm = () => {
     const navigate = useNavigate();

@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import GlobalStyles from "./styles/GlobalStyles";
 import {Route, Routes} from "react-router-dom";
@@ -6,6 +5,7 @@ import MainLayout from "./components/Main/MainLayout";
 import LoginPage from "./components/Login/LoginPage";
 import RegisterPage from "./components/Register/RegisterPage";
 import PostListPage from "./components/PostList/PostListPage";
+import {Provider} from "jotai";
 
 function App() {
   return (
