@@ -1,6 +1,6 @@
 import S from './TextInput.styled'
 
-const TextInput = ({title, name, type="text", onChange, onBlur}) => {
+const TextInput = ({title, name, value, type="text", onChange, onBlur}) => {
 
     return (
         <S.Wrapper>
@@ -8,6 +8,7 @@ const TextInput = ({title, name, type="text", onChange, onBlur}) => {
             <S.Input
                 name={name}
                 type={type}
+                value={value}
                 onChange={onChange}
                 onBlur={onBlur}
             />

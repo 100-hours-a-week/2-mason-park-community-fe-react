@@ -33,12 +33,12 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
             }, {})
         )
 
-        const errors = validate(values)
-        if (Object.values(errors).some(v => v)) {
+        const [filterValues, filterErrors] = validate(values)
+        if (Object.values(filterErrors).some(v => v)) {
             return;
         }
 
-        await onSubmit(values)
+        await onSubmit(filterValues)
     }
 
 
@@ -52,7 +52,10 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
             setDisabled(true);
         }
 
-        return validate(values)
+        const [filterValues, filterErrors] = validate(values)
+        setValues({
+            ...filterValues
+        });
     }, [touched])
 
     useEffect(() => {

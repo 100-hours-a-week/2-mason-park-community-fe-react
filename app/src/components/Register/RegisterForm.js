@@ -129,7 +129,7 @@ const RegisterForm = () => {
                 }
             }
 
-            return errors;
+            return [values, errors];
         },
         onSubmit: async (values) => {
             try {

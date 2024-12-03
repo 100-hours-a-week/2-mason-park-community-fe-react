@@ -8,7 +8,7 @@ import HelperMessage from "../common/HelperMessage";
 import {useAtom, useSetAtom} from "jotai";
 import {login} from "../../api/auth";
 import {getMyProfile} from "../../api/user";
-import {userAtom, loginErrorAtom as errorAtom} from "../../store/atoms";
+import {userAtom, commonErrorAtom as errorAtom} from "../../store/atoms";
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -40,7 +40,7 @@ const LoginForm = () => {
                 });
             }
 
-            if (!values.email || !validator.email(values.email)) return errors;
+            if (!values.email || !validator.email(values.email)) return [values, errors];
 
             // 비밀번호 유효성 검사 : 입력
             if (!values.password) {
@@ -61,7 +61,7 @@ const LoginForm = () => {
                 });
             }
 
-            return errors;
+            return [values, errors];
         },
         onSubmit: async values => {
             try {
@@ -85,7 +85,6 @@ const LoginForm = () => {
             }
         }
     })
-    
     return (
         <S.Wrapper>
             <S.Title>로그인</S.Title>
@@ -103,6 +102,7 @@ const LoginForm = () => {
                     type={"password"}
                     title={"비밀번호"}
                     name={"password"}
+                    value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
