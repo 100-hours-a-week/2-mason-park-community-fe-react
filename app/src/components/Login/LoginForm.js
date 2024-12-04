@@ -6,7 +6,7 @@ import {error, validator} from "../../utils/utils";
 import useForm from "../../hooks/useForm";
 import HelperMessage from "../common/HelperMessage";
 import {useAtom, useSetAtom} from "jotai";
-import {login} from "../../api/auth";
+import {loginRequest} from "../../api/auth";
 import {getMyProfile} from "../../api/user";
 import {userAtom, commonErrorAtom as errorAtom} from "../../store/atoms";
 
@@ -65,7 +65,7 @@ const LoginForm = () => {
         },
         onSubmit: async values => {
             try {
-                const loginRes = await login({
+                const loginRes = await loginRequest({
                     ...values,
                     password: window.btoa(values.password)
                 })
@@ -75,7 +75,7 @@ const LoginForm = () => {
                 const meRes = await getMyProfile();
                 if (meRes.status !== 200) return;
 
-                setUser(meRes.data);
+                setUser(meRes.data.data);
                 navigate('/');
             } catch (e) {
                 console.error(`${e.response.data.error} : ${e.response.data.message}`);

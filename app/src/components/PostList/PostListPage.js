@@ -1,9 +1,20 @@
 import S from './PostListPage.styled';
 import CommonButton from "../Button/CommonButton";
+import {useSetAtom} from "jotai/index";
+import {headerAtom} from "../../store/atoms";
+import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
 const PostListPage = () => {
     const navigate = useNavigate();
+    const setHeader = useSetAtom(headerAtom);
+
+    useEffect(() => {
+        setHeader({
+            back: 0,
+            profile: true
+        })
+    }, [])
 
     return (
         <S.Wrapper>

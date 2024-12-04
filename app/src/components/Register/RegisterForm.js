@@ -6,7 +6,7 @@ import ImageInput from "../Input/ImageInput";
 import useForm from "../../hooks/useForm";
 import {error, validator} from "../../utils/utils";
 import HelperMessage from "../common/HelperMessage";
-import {existEmail, existNickname, register} from "../../api/auth";
+import {existEmail, existNickname, registerRequest} from "../../api/auth";
 import {useAtom} from "jotai";
 import {registerErrorAtom as errorAtom} from "../../store/atoms";
 
@@ -134,10 +134,11 @@ const RegisterForm = () => {
         onSubmit: async (values) => {
             try {
                 // 프로필 이미지 추가, 비밀번호 base64 인코딩
-                const res = await register({
-                    ...values,
+                const res = await registerRequest({
+                    email: values.email,
+                    password: window.btoa(values.password),
+                    nickname: values.nickname,
                     profile_image: localStorage.getItem('profileImage'),
-                    password: window.btoa(values.password)
                 });
 
                 // 성공 시 로그인 페이지 이동

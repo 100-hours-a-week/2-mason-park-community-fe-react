@@ -33,7 +33,7 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
             }, {})
         )
 
-        const [filterValues, filterErrors] = validate(values)
+        const [filterValues, filterErrors] = await validate(values)
         if (Object.values(filterErrors).some(v => v)) {
             return;
         }
@@ -43,7 +43,7 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
 
 
     // 포커스 아웃될 때 검증 함수를 실행하는 함수를 정의
-    const runValidator = useCallback(() => {
+    const runValidator = useCallback(async () => {
 
         // 폼을 전부 다 입력한 경우
         if (Object.values(values).every(v => v)) {
@@ -51,8 +51,8 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
         } else {
             setDisabled(true);
         }
+        const [filterValues, _] = await validate(values)
 
-        const [filterValues, filterErrors] = validate(values)
         setValues({
             ...filterValues
         });

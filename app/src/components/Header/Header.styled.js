@@ -3,15 +3,14 @@ import {IoIosArrowBack} from "react-icons/io";
 
 const S = {
     Wrapper: styled.div`
-        width: 100%;
-        height: 104px;
+        width: 600px;
+        height: 100%;
         
-        display: flex;
-        justify-content: center;
+        display: grid;
+        grid-template-columns: 150px auto 150px;
         align-items: center;
         
-        border-bottom: 1px solid black;
-        
+        position: relative;
     `,
     BackButtonWrapper: styled.div`
         width: 35px;
@@ -32,8 +31,6 @@ const S = {
         text-align: center;
         font-size: 32px;
         font-weight: 400;
-        
-        margin: 0 10%;
     `,
 }
 

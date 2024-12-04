@@ -13,19 +13,20 @@ const S = {
         justify-content: center;
         align-items: center;
         
+        overflow: hidden;
         cursor: pointer;
     `,
 
     Image: styled.img`
-        width: 80%;
-        height: 80%;
+        width: 100%;
+        height: 100%;
         
         object-fit: contain;
     `,
     
     NoImage: styled(FaUser)`
-        width: 70%;
-        height: 70%;
+        width: 100%;
+        height: 100%;
     `
 }
 
