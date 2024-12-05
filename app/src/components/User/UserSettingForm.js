@@ -12,10 +12,12 @@ import FormButton from "../Button/FormButton";
 import {updateMyProfileRequest} from "../../api/user";
 import {Slide, toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import useModal from "../../hooks/useModal";
 
 const UserSettingForm = () => {
     const [user, setUser] = useAtom(userAtom);
     const [errors, setErrors] = useAtom(errorAtom);
+    const {openModal} = useModal();
     const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
         initialValues: {
             nickname: user.nickname
@@ -122,6 +124,7 @@ const UserSettingForm = () => {
                     disabled={disabled}
                     onClick={handleSubmit}
                 />
+                <S.Link onClick={() => openModal('withdraw')}>회원 탈퇴</S.Link>
                 <ToastContainer/>
             </S.Wrapper>
         </>

@@ -34,3 +34,14 @@ export const updatePasswordRequest = async (data) => {
         data: data,
     })
 }
+
+export const withdrawRequest = async (data) => {
+    return await axios.request({
+        method: 'DELETE',
+        url: `http://localhost:8080/api/users/withdraw`,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        withCredentials: true
+    })
+}

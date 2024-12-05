@@ -68,3 +68,23 @@ export const convertToKUnit = val => {
         return val;
     }
 }
+
+const getScrollbarWidth = () => {
+    return window.innerWidth - document.documentElement.offsetWidth;
+}
+
+export const blockScroll = (className= 'stop-scrolling') => {
+    const isBlocked = document.body.classList.contains(className);
+    if(isBlocked) return;
+
+    document.body.style.setProperty('--scrollbar-width', `${getScrollbarWidth()}px`);
+    document.body.classList.add(className);
+}
+
+export const unblockScroll = (className= 'stop-scrolling') => {
+    const isBlocked = document.body.classList.contains(className);
+    if(!isBlocked) return;
+
+    document.body.style.removeProperty('--scrollbar-width');
+    document.body.classList.remove(className);
+}

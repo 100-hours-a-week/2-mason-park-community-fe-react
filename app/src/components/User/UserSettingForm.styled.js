@@ -35,7 +35,13 @@ const S = {
         min-height: 95px;
         display: flex;
         flex-direction: column;
-    `
+    `,
+    Link: styled.span`
+        font-size: 14px;
+        font-weight: 400;
+        cursor: pointer;
+        margin: 5px 0;
+    `,
 }
 
 export default S;
