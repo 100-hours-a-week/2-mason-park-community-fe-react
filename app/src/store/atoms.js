@@ -28,3 +28,8 @@ export const registerErrorAtom = atom({
     nickname: '',
 })
 
+/* 모달 상태*/
+export const modalAtom = atom({
+    isOpen: false,
+    element: null
+})
