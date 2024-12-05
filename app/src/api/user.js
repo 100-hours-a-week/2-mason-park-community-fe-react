@@ -22,3 +22,15 @@ export const updateMyProfileRequest = async (data) => {
         data: data,
     })
 }
+
+export const updatePasswordRequest = async (data) => {
+    return await axios.request({
+        method: "PATCH",
+        url: "http://localhost:8080/api/users/me/password",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        withCredentials: true,
+        data: data,
+    })
+}

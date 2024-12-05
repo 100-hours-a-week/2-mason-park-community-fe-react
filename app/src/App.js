@@ -8,6 +8,7 @@ import PostListPage from "./components/PostList/PostListPage";
 import PostEditPage from "./components/PostEdit/PostEditPage";
 import UserSettingPage from "./components/User/UserSettingPage";
 import UserSettingForm from "./components/User/UserSettingForm";
+import UserPasswordForm from "./components/User/UserPasswordForm";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path={"users"} element={<UserSettingPage />}>
                 {/* 회원정보수정 페이지 */}
                 <Route path={"setting"} element={<UserSettingForm/>} />
+                <Route path={"password"} element={<UserPasswordForm/>} />
             </Route>
 
             {/* 게시글 목록 페이지 */}
