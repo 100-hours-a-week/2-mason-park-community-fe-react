@@ -7,7 +7,7 @@ const S = {
         height: 100%;
         
         display: grid;
-        grid-template-columns: 150px auto 150px;
+        grid-template-columns: 35px auto 35px;
         align-items: center;
         
         position: relative;

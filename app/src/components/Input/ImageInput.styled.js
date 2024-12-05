@@ -24,6 +24,7 @@ const S = {
         justify-content: center;
         align-items: center;
         
+        border: 1px solid black;
         background-color: #c4c4c4;
         border-radius: 50%;
         overflow: hidden;

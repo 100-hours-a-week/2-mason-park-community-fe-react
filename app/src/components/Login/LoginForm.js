@@ -7,7 +7,7 @@ import useForm from "../../hooks/useForm";
 import HelperMessage from "../common/HelperMessage";
 import {useAtom, useSetAtom} from "jotai";
 import {loginRequest} from "../../api/auth";
-import {getMyProfile} from "../../api/user";
+import {getMyProfileRequest} from "../../api/user";
 import {userAtom, commonErrorAtom as errorAtom} from "../../store/atoms";
 
 const LoginForm = () => {
@@ -72,7 +72,7 @@ const LoginForm = () => {
 
                 if (loginRes.status !== 200) return;
 
-                const meRes = await getMyProfile();
+                const meRes = await getMyProfileRequest();
                 if (meRes.status !== 200) return;
 
                 setUser(meRes.data.data);

@@ -6,6 +6,8 @@ import LoginPage from "./components/Login/LoginPage";
 import RegisterPage from "./components/Register/RegisterPage";
 import PostListPage from "./components/PostList/PostListPage";
 import PostEditPage from "./components/PostEdit/PostEditPage";
+import UserSettingPage from "./components/User/UserSettingPage";
+import UserSettingForm from "./components/User/UserSettingForm";
 
 function App() {
   return (
@@ -15,19 +17,25 @@ function App() {
         <Route path={"/"} element={<MainLayout />}>
 
             {/* 로그인 페이지 */}
-            <Route path={"/login"} element={<LoginPage />} />
+            <Route path={"login"} element={<LoginPage />} />
 
             {/* 회원가입 페이지 */}
-            <Route path={"/register"} element={<RegisterPage />} />
+            <Route path={"register"} element={<RegisterPage />} />
+
+
+            <Route path={"users"} element={<UserSettingPage />}>
+                {/* 회원정보수정 페이지 */}
+                <Route path={"setting"} element={<UserSettingForm/>} />
+            </Route>
 
             {/* 게시글 목록 페이지 */}
-            <Route path={"/"} element={<PostListPage />}/>
+            <Route path={""} element={<PostListPage />}/>
 
             {/* 게시글 작성 페이지 */}
-            <Route path={"/posts/write"} element={<PostEditPage />}/>
+            <Route path={"posts/write"} element={<PostEditPage />}/>
 
             {/* 게시글 수정 페이지 */}
-            <Route path={"/posts/:post_id/modify"} element={<PostEditPage />}/>
+            <Route path={"posts/:post_id/modify"} element={<PostEditPage />}/>
         </Route>
       </Routes>
     </>

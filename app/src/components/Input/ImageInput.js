@@ -1,10 +1,13 @@
 import S from './ImageInput.styled'
 import SC from '../common/common.styled'
-import { useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import {error} from "../../utils/utils";
+import {useAtomValue} from "jotai";
+import {userAtom} from "../../store/atoms";
 
 const ImageInput = ({title, name, type="file"}) => {
-    const [imageUrl, setImageUrl] = useState('');
+    const user = useAtomValue(userAtom);
+    const [imageUrl, setImageUrl] = useState(user.profile_image);
     const fileInputRef = useRef(null);
 
     const openInput = () => {
