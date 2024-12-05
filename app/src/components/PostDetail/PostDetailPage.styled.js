@@ -18,15 +18,6 @@ const S = {
         font-size: 24px;
         text-align: center;
         line-height: 31px;
-    `,
-    PostContainer: styled.div`
-        width: 100%;
-        
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-        margin: 20px 0;
     `
 }
 

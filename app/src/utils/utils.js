@@ -56,3 +56,15 @@ export const validator = {
         return 0 <= value.length && value.length <= 1500;
     }
 }
+
+export const convertToKUnit = val => {
+    if (Number(val) >= 100000) {
+        return '100K';
+    } else if (Number(val) >= 10000) {
+        return '10K';
+    } else if (Number(val) >= 1000) {
+        return '1K';
+    } else {
+        return val;
+    }
+}

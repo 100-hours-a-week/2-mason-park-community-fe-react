@@ -10,7 +10,7 @@ import TitleInput from "../Input/TitleInput";
 import ContentInput from "../Input/ContentInput";
 import FileInput from "../Input/FileInput";
 import {useState} from "react";
-import {createPost} from "../../api/post";
+import {createPostRequest} from "../../api/post";
 
 const PostForm = ({post_id, title, content}) => {
     const navigate = useNavigate();
@@ -89,7 +89,7 @@ const PostForm = ({post_id, title, content}) => {
                     type: 'application/json'
                 }))
 
-                const res = await createPost(formData);
+                const res = await createPostRequest(formData);
 
                 if (res.status !== 201) return;
 
