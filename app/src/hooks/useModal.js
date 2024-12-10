@@ -4,10 +4,12 @@ import {useCallback} from "react";
 import WithdrawModal from "../components/Modal/WithdrawModal";
 import {blockScroll, unblockScroll} from "../utils/utils";
 import PostDeleteModal from "../components/Modal/PostDeleteModal";
+import CommentDeleteModal from "../components/Modal/CommentDeleteModal";
 
 const ModalType = {
     withdraw: <WithdrawModal />,
-    deletePost: <PostDeleteModal />
+    deletePost: <PostDeleteModal />,
+    deleteComment: <CommentDeleteModal />,
 }
 
 const useModal = () => {

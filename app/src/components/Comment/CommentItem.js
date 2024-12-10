@@ -12,7 +12,7 @@ const CommentItem = ({
     user,
     created_at
  }) => {
-    const {modal, openModal} = useModal();
+    const {openModal} = useModal();
     const params = useParams();
     const me = useAtomValue(userAtom);
     const [_, setComment] = useAtom(commentAtom);
@@ -32,7 +32,7 @@ const CommentItem = ({
                 {user && user.user_id === me.user_id && (
                     <S.MetaButtonContainer>
                         <DetailButton title={"수정"} handler={modifyHandler} />
-                        <DetailButton title={"삭제"} />
+                        <DetailButton title={"삭제"} handler={() => {openModal('deleteComment', {'post_id': params.post_id, 'comment_id': comment_id})}} />
                     </S.MetaButtonContainer>
                 )}
             </S.MetaContainer>

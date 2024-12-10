@@ -31,3 +31,14 @@ export const updateCommentRequest = async (postId, commentId, data) => {
         withCredentials: true
     })
 }
+
+export const deleteCommentRequest = async (postId, commentId) => {
+    return await axios.request({
+        method: "DELETE",
+        url: `http://localhost:8080/api/posts/${postId}/comments/${commentId}`,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        withCredentials: true
+    })
+}
