@@ -28,9 +28,14 @@ export const registerErrorAtom = atom({
     nickname: '',
 })
 
-/* 모달 상태*/
+/* 모달 상태 */
 export const modalAtom = atom({
     isOpen: false,
     element: null,
     targetId: null,
 })
+
+/* 댓글 목록 상태 */
+export const commentAtom = atom({
+    isNew: false,
+});

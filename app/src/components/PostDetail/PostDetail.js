@@ -31,7 +31,7 @@ const PostDetail = ({
                     {user && user.user_id === me.user_id && (
                         <S.MetaButtonContainer>
                             <DetailButton title={"수정"} handler={() => {navigate(`/posts/${post_id}/modify`)}} />
-                            <DetailButton title={"삭제"} handler={() => openModal('deletePost', post_id)}/>
+                            <DetailButton title={"삭제"} handler={() => openModal('deletePost', {'post_id': post_id})}/>
                         </S.MetaButtonContainer>
                     )}
                 </S.MetaContainer>
