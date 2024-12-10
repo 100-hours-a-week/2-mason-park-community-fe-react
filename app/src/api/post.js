@@ -23,3 +23,25 @@ export const getPostsRequest = async (offset, limit=5) => {
         }
     })
 }
+
+export const getPostRequest = async (postId) => {
+    return await axios.request({
+        method: "GET",
+        url: `http://localhost:8080/api/posts/${postId}`,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        withCredentials: true
+    })
+}
+
+export const deletePostRequest = async (postId) => {
+    return await axios.request({
+        method: "DELETE",
+        url: `http://localhost:8080/api/posts/${postId}`,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        withCredentials: true
+    })
+}

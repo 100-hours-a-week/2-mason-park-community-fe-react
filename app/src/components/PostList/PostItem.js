@@ -4,13 +4,13 @@ import {useNavigate} from "react-router-dom";
 import ProfileImage from "../common/ProfileImage";
 
 const PostItem = ({
-                      post_id,
-                      title,
-                      thumb_count,
-                      view_count,
-                      comment_count,
-                      created_at,
-                      user
+      post_id,
+      title,
+      thumb_count,
+      view_count,
+      comment_count,
+      created_at,
+      user
 }) => {
     const navigate = useNavigate();
     const navigateDetail = () => {
