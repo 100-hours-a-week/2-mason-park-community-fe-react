@@ -35,7 +35,11 @@ export const modalAtom = atom({
     targetId: null,
 })
 
-/* 댓글 목록 상태 */
+/* 댓글 상태 */
 export const commentAtom = atom({
-    isNew: false,
+    comment_id: '',
+    content: '',
 });
+
+/* 변경 상태 */
+export const changeAtom = atom(false);

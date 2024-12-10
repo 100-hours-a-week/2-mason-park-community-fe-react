@@ -10,8 +10,9 @@ import CommentItem from "../Comment/CommentItem";
 
 const PostDetailPage = () => {
     const {post} = usePost();
-    const {comments} = useComments();
+    const {comments, loading} = useComments();
     const setHeader = useSetAtom(headerAtom);
+
     useEffect(() => {
         setHeader({
             back: 1,
@@ -24,7 +25,7 @@ const PostDetailPage = () => {
             <PostDetail {...post} />
             <CommentForm />
             <S.CommentContainer>
-                {comments && comments.map((comment) => (
+                {!loading && comments.map((comment) => (
                     <CommentItem key={comment.comment_id} {...comment} />
                 ))}
             </S.CommentContainer>

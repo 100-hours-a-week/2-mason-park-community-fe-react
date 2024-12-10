@@ -1,16 +1,18 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {useAtom} from "jotai";
-import {commentAtom} from "../store/atoms";
 import {getCommentsRequest} from "../api/comment";
+import {useAtom} from "jotai";
+import {changeAtom} from "../store/atoms";
 
 const useComments = () => {
     const params = useParams();
-    const [comment, setComment] = useAtom(commentAtom);
+    const [isChange, setIsChange] = useAtom(changeAtom);
+    const [loading, setLoading] = useState(false);
     const [comments, setComments] = useState([]);
 
     const getComments = async () => {
         try {
+            setLoading(true);
             const res = await getCommentsRequest(params.post_id);
 
             if (res.status !== 200) return;
@@ -19,19 +21,17 @@ const useComments = () => {
         } catch (e) {
             console.error(`${e.response.data.error} : ${e.response.data.message}`);
         }
+        setLoading(false);
     }
 
     useEffect(() => {
         getComments();
-        setComment(prev => {
-            return {...prev, isNew: false};
-        });
-    }, [comment.isNew]);
+        setIsChange(false);
+    }, [isChange]);
 
     return {
         comments,
-        comment,
-        setComment
+        loading,
     }
 }
 
