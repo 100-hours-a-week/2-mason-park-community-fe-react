@@ -3,9 +3,11 @@ import {useAtom} from "jotai";
 import {useCallback} from "react";
 import WithdrawModal from "../components/Modal/WithdrawModal";
 import {blockScroll, unblockScroll} from "../utils/utils";
+import PostDeleteModal from "../components/Modal/PostDeleteModal";
 
 const ModalType = {
-    withdraw: <WithdrawModal />
+    withdraw: <WithdrawModal />,
+    deletePost: <PostDeleteModal />
 }
 
 const useModal = () => {
@@ -18,13 +20,14 @@ const useModal = () => {
         })
     }, [setModal]);
 
-    const openModal = useCallback(type => {
+    const openModal = useCallback((type, id) => {
         blockScroll();
         setModal(prev => {
             return {
                 ...prev,
                 element: ModalType[type],
-                isOpen: true
+                isOpen: true,
+                targetId: id
             }
         })
     }, [setModal]);

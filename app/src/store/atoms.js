@@ -31,5 +31,6 @@ export const registerErrorAtom = atom({
 /* 모달 상태*/
 export const modalAtom = atom({
     isOpen: false,
-    element: null
+    element: null,
+    targetId: null,
 })
