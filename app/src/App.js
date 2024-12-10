@@ -12,6 +12,7 @@ import UserPasswordForm from "./components/User/UserPasswordForm";
 import Modal from "./components/Modal/Modal";
 import useModal from "./hooks/useModal";
 import PostDetailPage from "./components/PostDetail/PostDetailPage";
+import PostModifyPage from "./components/PostEdit/PostModifyPage";
 
 function App() {
     const {modal} = useModal();
@@ -45,7 +46,7 @@ function App() {
                 <Route path={"posts/write"} element={<PostEditPage />}/>
 
                 {/* 게시글 수정 페이지 */}
-                <Route path={"posts/:post_id/modify"} element={<PostEditPage />}/>
+                <Route path={"posts/:post_id/modify"} element={<PostModifyPage />}/>
             </Route>
           </Routes>
         </>

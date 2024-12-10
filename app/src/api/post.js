@@ -45,3 +45,12 @@ export const deletePostRequest = async (postId) => {
         withCredentials: true
     })
 }
+
+export const updatePostRequest = async (postId, data) => {
+    return await axios.request({
+        method: "PATCH",
+        url: `http://localhost:8080/api/posts/${postId}`,
+        data: data,
+        withCredentials: true
+    })
+}

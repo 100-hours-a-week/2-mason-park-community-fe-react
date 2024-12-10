@@ -5,10 +5,12 @@ import {getPostRequest} from "../api/post";
 const usePost = () => {
     const params = useParams();
 
+    const [loading, setLoading] = useState(false);
     const [post, setPost] = useState({});
 
     const getPost = async () => {
         try {
+            setLoading(true);
             const res = await getPostRequest(params.post_id);
 
             if (res.status !== 200) return;
@@ -17,14 +19,16 @@ const usePost = () => {
         } catch (e) {
             console.error(`${e.response.data.error} : ${e.response.data.message}`);
         }
+        setLoading(false);
     }
 
     useEffect(() => {
         getPost();
-    }, []);
+    }, [params.post_id]);
 
     return {
-        post
+        post,
+        loading
     }
 }
 

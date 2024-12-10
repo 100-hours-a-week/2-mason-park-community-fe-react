@@ -19,7 +19,11 @@ const PostDetail = ({
     user
 }) => {
     const navigate = useNavigate();
+
+    // 모달
     const {openModal} = useModal();
+
+    // 현재 로그인 유저 정보
     const me = useAtomValue(userAtom);
     return (
         <S.Wrapper>
@@ -30,7 +34,7 @@ const PostDetail = ({
                     <S.MetaTime>{created_at}</S.MetaTime>
                     {user && user.user_id === me.user_id && (
                         <S.MetaButtonContainer>
-                            <DetailButton title={"수정"} handler={() => {navigate(`/posts/${post_id}/modify`)}} />
+                            <DetailButton title={"수정"} handler={() => navigate(`/posts/${post_id}/modify`)} />
                             <DetailButton title={"삭제"} handler={() => openModal('deletePost', {'post_id': post_id})}/>
                         </S.MetaButtonContainer>
                     )}

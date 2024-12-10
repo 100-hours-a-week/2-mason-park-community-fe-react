@@ -10,11 +10,10 @@ import TitleInput from "../Input/TitleInput";
 import ContentInput from "../Input/ContentInput";
 import FileInput from "../Input/FileInput";
 import {useState} from "react";
-import {createPostRequest} from "../../api/post";
+import {createPostRequest, updatePostRequest} from "../../api/post";
 
 const PostForm = ({post_id, title, content}) => {
     const navigate = useNavigate();
-
     const [errors, setErrors] = useAtom(errorAtom);
     const [image, setImage] = useState(null);
 
@@ -26,8 +25,8 @@ const PostForm = ({post_id, title, content}) => {
 
     const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
         initialValues: {
-            title: "",
-            content: "",
+            title: title,
+            content: content
         },
         validate: values => {
 
@@ -89,12 +88,19 @@ const PostForm = ({post_id, title, content}) => {
                     type: 'application/json'
                 }))
 
-                const res = await createPostRequest(formData);
+                if (post_id) {
+                    const res = await updatePostRequest(post_id, formData);
+                    if (res.status !== 200) return;
 
-                if (res.status !== 201) return;
+                    // 성공 시 상세 페이지로 이동
+                    navigate(`/posts/${post_id}`)
+                } else {
+                    const res = await createPostRequest(formData);
+                    if (res.status !== 201) return;
 
-                // 성공 시 상세 페이지로 이동
-                navigate(`/posts/${res.data.data.post_id}`)
+                    // 성공 시 상세 페이지로 이동
+                    navigate(`/posts/${res.data.data.post_id}`)
+                }
             } catch (e) {
                 console.error(`${e.response.data.error} : ${e.response.data.message}`);
                 setErrors((prev) => {
@@ -132,7 +138,7 @@ const PostForm = ({post_id, title, content}) => {
                     onChange={handleImage}
                 />
             </S.FileInputWrapper>
-            <FormButton title={"완료"} disabled={disabled} onClick={handleSubmit}/>
+            <FormButton title={post_id ? "수정하기" : "완료"} disabled={disabled} onClick={handleSubmit}/>
         </S.Wrapper>
     )
 }
