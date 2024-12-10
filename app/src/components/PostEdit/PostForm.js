@@ -20,7 +20,12 @@ const PostForm = ({post_id, title, content}) => {
     const handleImage = (e) => {
         const file = e.target.files?.[0];
         if (!file) return;
-        setImage(file);
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = (e) => {
+            setImage(reader.result);
+        }
     }
 
     const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
@@ -76,26 +81,21 @@ const PostForm = ({post_id, title, content}) => {
         },
         onSubmit: async values => {
             try {
-                const formData = new FormData();
 
                 // 이미지가 존재할 경우 포함
-                if (image) {
-                    formData.append("post_image", image);
-                }
-
-                // 게시글 제목, 내용
-                formData.append('data', new Blob([JSON.stringify(values)], {
-                    type: 'application/json'
-                }))
+                const data = {
+                    ...values,
+                    post_image: image
+                };
 
                 if (post_id) {
-                    const res = await updatePostRequest(post_id, formData);
+                    const res = await updatePostRequest(post_id, data);
                     if (res.status !== 200) return;
 
                     // 성공 시 상세 페이지로 이동
                     navigate(`/posts/${post_id}`)
                 } else {
-                    const res = await createPostRequest(formData);
+                    const res = await createPostRequest(data);
                     if (res.status !== 201) return;
 
                     // 성공 시 상세 페이지로 이동

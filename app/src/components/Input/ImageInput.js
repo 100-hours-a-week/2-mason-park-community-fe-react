@@ -1,6 +1,6 @@
 import S from './ImageInput.styled'
 import SC from '../common/common.styled'
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import {error} from "../../utils/utils";
 import {useAtomValue} from "jotai";
 import {userAtom} from "../../store/atoms";
