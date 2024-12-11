@@ -31,6 +31,8 @@ const S = {
         text-align: center;
         font-size: 32px;
         font-weight: 400;
+        
+        cursor: pointer;
     `,
 }
 

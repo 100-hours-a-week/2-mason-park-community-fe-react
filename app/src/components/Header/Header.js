@@ -31,7 +31,7 @@ const Header = () => {
                     <div style={{ width: '35px' }}></div>
                 )
             }
-            <S.Title>
+            <S.Title onClick={() => {navigate('/')}}>
                 아무 말 대잔치
             </S.Title>
             {

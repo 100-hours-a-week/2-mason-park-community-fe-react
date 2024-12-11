@@ -1,9 +1,19 @@
 import S from './PostEditPage.styled';
 import PostForm from "./PostForm";
 import usePost from "../../hooks/usePost";
+import {useAtom} from "jotai/index";
+import {headerAtom} from "../../store/atoms";
+import {useEffect} from "react";
 
 const PostModifyPage = () => {
     const {post, loading} = usePost();
+    const [_, setHeader] = useAtom(headerAtom);
+    useEffect(() => {
+        setHeader({
+            back: 1,
+            profile: true
+        })
+    }, [])
     return (
         <S.Wrapper>
             <>
