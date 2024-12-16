@@ -4,7 +4,7 @@ const SC = {
     Helper: styled.div`
         font-size: 12px;
         font-weight: 400;
-        color: #FF0000;
+        color: #F3727F;
     `
 }
 

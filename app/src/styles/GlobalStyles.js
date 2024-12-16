@@ -21,6 +21,8 @@ const GlobalStyles = createGlobalStyle`
     body {
         font-family: 'GmarketSansMedium', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
         min-width: 320px;
+        color: white;
+        background-color: #121212;
     }
     
     button {
@@ -40,9 +42,17 @@ const GlobalStyles = createGlobalStyle`
         list-style: none;
     }
     
+    input, textarea {
+        border: 1px solid #B3B3B3;
+        background-color: #535353;
+        color: white;
+    }
+    
     input:focus {
         outline: none;
+        border: 2px solid white;
     }
+    
     
     span {
         white-space: pre-line;

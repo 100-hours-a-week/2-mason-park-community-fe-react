@@ -9,7 +9,7 @@ const S = {
         flex-direction: column;
         justify-content: space-evenly;
 
-        background-color: white;
+        background-color: #212121;
         border-radius: 16px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.05);
         cursor: pointer;
@@ -24,7 +24,7 @@ const S = {
     MetaContainer: styled.div`
         width: 100%;
         display: flex;
-        border-bottom: 1px solid #D9D9D9;
+        border-bottom: 1px solid #1ED760;
     `,
     MetaItem: styled.span`
         margin-right: 10px;

@@ -60,8 +60,8 @@ const PostListPage = () => {
     return (
         <S.Wrapper>
             <S.Title>
-                안녕하세요, <br/>
-                아무 말 대잔치 게시판 입니다.
+                어서오세요, <br/>
+                민수네 커뮤니티 입니다.
             </S.Title>
             <CommonButton title={"게시글 작성"} handler={() => navigate('/posts/write')}/>
             <S.PostContainer>

@@ -8,8 +8,8 @@ const S = {
         margin: 10px 0;
         
         border-radius: 4px;
-        background-color: ${(props) => props.disabled ? '#ACA0EB' : '#7F6AEE'};
-        color: white;
+        background-color: ${(props) => props.disabled ? '#1ED760' : '#3BE477'};
+        color: #121212;
         
         font-size: 14px;
         font-weight: 700;

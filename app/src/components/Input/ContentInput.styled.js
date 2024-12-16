@@ -5,6 +5,7 @@ const S = {
         width: 100%;
         display: flex;
         flex-direction: column;
+        margin-bottom: 5px;
     `,
     Label: styled.label`
         font-weight: 700;
@@ -16,9 +17,8 @@ const S = {
     Textarea: styled.textarea`
         height: 300px;
         resize: none;
-        border: none;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
+        border-radius: 12px;
+        border: 1px solid #B3B3B3;
         outline: none;
         padding: 20px;
     `

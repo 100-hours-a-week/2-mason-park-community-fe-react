@@ -17,10 +17,10 @@ const PostForm = ({post_id, title, content}) => {
     const [errors, setErrors] = useAtom(errorAtom);
     const [image, setImage] = useState(null);
 
-    const handleImage = (e) => {
+    const handleImage = (e, setFilename) => {
         const file = e.target.files?.[0];
         if (!file) return;
-
+        setFilename(file.name);
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = (e) => {

@@ -21,7 +21,7 @@ const S = {
         height: 240px;
         padding: 30px;
 
-        background-color: white;
+        background-color: #212121;
         border-radius: 12px;
 
         display: flex;
@@ -53,8 +53,8 @@ const S = {
         height: 45px;
         
         border-radius: 12px;
-        background-color: black;
-        color: white;
+        background-color: #1ED760;
+        color: black;
         
         font-size: 20px;
         text-align: center;
@@ -67,7 +67,7 @@ const S = {
         height: 45px;
 
         border-radius: 12px;
-        background-color: #C4A5FA;
+        background-color: #1ED760;
         color: black;
 
         font-size: 20px;

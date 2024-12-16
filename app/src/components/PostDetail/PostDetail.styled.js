@@ -41,8 +41,8 @@ const S = {
         align-items: center;
         justify-content: space-between;
         
-        border-top: 1px solid #D9D9D9;
-        border-bottom: 1px solid #D9D9D9;
+        border-top: 1px solid #1ED760;
+        border-bottom: 1px solid #1ED760;
     `,
     ContentImage: styled.img`
         width: 100%;
@@ -74,8 +74,8 @@ const S = {
         height: 75px;
         
         border-radius: 16px;
-        background-color: #D9D9D9;
-        
+        background-color: #1ED760;
+        color: black;
         font-size: 20px;
         font-weight: 700;
         line-height: 35px;

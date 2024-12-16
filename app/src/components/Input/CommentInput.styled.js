@@ -5,7 +5,6 @@ const S = {
         width: 100%;
         display: flex;
         flex-direction: column;
-        border-bottom: 1px solid #D9D9D9;
     `,
     Label: styled.label`
         font-weight: 700;
@@ -19,7 +18,7 @@ const S = {
         height: 120px;
         resize: none;
         
-        border: none;
+        border-radius: 8px;
         
         outline: none;
         padding: 20px;

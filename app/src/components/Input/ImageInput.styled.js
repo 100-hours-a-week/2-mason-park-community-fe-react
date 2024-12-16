@@ -24,8 +24,8 @@ const S = {
         justify-content: center;
         align-items: center;
         
-        border: 1px solid black;
-        background-color: #c4c4c4;
+        border: 1px solid #B3B3B3;
+        background-color: #535353;
         border-radius: 50%;
         overflow: hidden;
         cursor: pointer;
@@ -36,6 +36,7 @@ const S = {
     `,
 
     NoImage: styled(FaPlus)`
+        color: #B3B3B3;
         width: 35px;
         height: 35px;
     `,

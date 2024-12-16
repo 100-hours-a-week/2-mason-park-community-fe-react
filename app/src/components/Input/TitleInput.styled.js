@@ -18,10 +18,8 @@ const S = {
         height: 65px;
         font-size: 16px;
         font-weight: 700;
-        border-radius: 0;
-        border: none;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
+        border-radius: 12px;
+        border: 1px solid #B3B3B3;
         padding: 0 20px;
     `,
 }

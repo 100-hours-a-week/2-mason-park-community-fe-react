@@ -7,7 +7,7 @@ const MainLayout = () => {
     return (
         <S.Layout>
             <S.HeaderWrapper>
-                <Header title={'아무 말 대잔치'}/>
+                <Header />
             </S.HeaderWrapper>
             <Outlet />
         </S.Layout>

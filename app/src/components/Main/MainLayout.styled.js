@@ -7,18 +7,19 @@ const S = {
         align-items: center;
         position: relative;
         min-height: 100vh;
-        background-color: #F4F5F7;
     `,
     HeaderWrapper: styled.div`
-        width: 100%;
         height: 104px;
 
         display: flex;
         justify-content: center;
         align-items: center;
-
-        border-bottom: 1px solid black;
-
+        
+        background-color: #212121;
+        border-radius: 12px;
+        
+        margin-bottom: 5px;
+        
         position: relative;
     `
 }

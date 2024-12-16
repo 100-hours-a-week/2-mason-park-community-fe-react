@@ -21,15 +21,17 @@ const PostDetailPage = () => {
     }, [])
 
     return (
-        <S.Wrapper>
-            <PostDetail {...post} />
-            <CommentForm />
+        <>
+            <S.Wrapper>
+                <PostDetail {...post} />
+                <CommentForm />
+            </S.Wrapper>
             <S.CommentContainer>
                 {!loading && comments.map((comment) => (
                     <CommentItem key={comment.comment_id} {...comment} />
                 ))}
             </S.CommentContainer>
-        </S.Wrapper>
+        </>
     );
 }
 

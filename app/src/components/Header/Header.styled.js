@@ -7,8 +7,9 @@ const S = {
         height: 100%;
         
         display: grid;
-        grid-template-columns: 35px auto 35px;
+        grid-template-columns: 150px auto 150px;
         align-items: center;
+        justify-items: center;
         
         position: relative;
     `,

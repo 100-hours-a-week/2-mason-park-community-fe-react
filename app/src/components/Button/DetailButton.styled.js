@@ -8,17 +8,20 @@ const S = {
         margin: 5px;
         
         border-radius: 8px;
-        border: 1px solid #ACA0EB;
-        background-color: white;
+        background-color: #1ED760;
         color: black;
         
-        font-size: 15px;
-        font-weight: 400;
+        font-size: 12px;
+        font-weight: 700;
         text-align: center;
         
         align-self: flex-end;
         
         cursor: pointer;
+        
+        &:hover {
+            background-color: #3BE477;
+        }
     `
 }
 

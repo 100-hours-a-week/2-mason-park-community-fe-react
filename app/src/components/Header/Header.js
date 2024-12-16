@@ -32,7 +32,7 @@ const Header = () => {
                 )
             }
             <S.Title onClick={() => {navigate('/')}}>
-                아무 말 대잔치
+                민수네 커뮤니티
             </S.Title>
             {
                 header.profile &&

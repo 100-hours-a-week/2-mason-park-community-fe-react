@@ -15,7 +15,7 @@ const S = {
         justify-content: center;
         align-items: center;
 
-        background: white;
+        background: #212121;
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 15px;
         z-index: 100;
@@ -31,7 +31,8 @@ const S = {
         cursor: pointer;
 
         &:hover {
-            background-color: #D9D9D9;
+            background-color: #121212;
+            color: #1ED760;
         }
 
         &:first-child:hover {
