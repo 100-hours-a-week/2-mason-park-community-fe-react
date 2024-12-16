@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# 민수네 커뮤니티 [FE]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 목차
 
-## Available Scripts
+- [1. 프로젝트 개요](#1-프로젝트-개요)
+    - [1-1. 프로젝트 소개](#1-1-프로젝트-소개)
+    - [1-2. 개발 스택](#1-2-개발-스택)
+    - [1-3. 주요 기능](#1-3-주요-기능)
+- [2. 개발 결과물](#2-개발-결과물)
+    - [2-1. 시스템 아키텍처](#2-1-시스템-아키텍처)
+    - [2-2. ERD](#2-2-erd)
+    - [2-3. API 문서](#2-3-api-문서)
 
-In the project directory, you can run:
+## 1. 프로젝트 개요
 
-### `npm start`
+### 1-1. 프로젝트 소개
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+KTB 클라우드 교육 과정에서 과제로 진행하는 커뮤니티 입니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> 개발 기간 : 2024.11 ~ 진행 중 <br/>
+> 개발 인원 : 개인 프로젝트 <br/>
+> 배포 URL :
 
-### `npm test`
+### 1-2. 개발 스택
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white">
+    <img src="https://img.shields.io/badge/node.js-6DB33F?style=for-the-badge&logo=node.js&logoColor=white">
+    <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
+    <img src="https://img.shields.io/badge/StyledComponents-DB7093?style=for-the-badge&logo=StyledComponents&logoColor=white">
+    <img src="https://img.shields.io/badge/jotai-ffffff?style=for-the-badge&logo=jotai&logoColor=white">
+</div>
 
-### `npm run build`
+### 1-3. 주요 기능
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[시연 영상 URL](https://drive.google.com/file/d/1H3CKiEd1hRkiijUv4EUx-YWvnoCEnwBz/view?usp=sharing)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 2. 개발 결과물
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2-1. 시스템 아키텍처
 
-### `npm run eject`
+### 2-2. ERD
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+[ERD 링크](https://www.erdcloud.com/d/7cj7j3JeNSdtJbPrD)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2-3. API 문서
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[API 문서 링크](https://docs.google.com/spreadsheets/d/1hllmByQVh6BZ8FnkE5KX_E9qE8XzupBqrSLQAXZQmiM/edit?gid=1878554884#gid=1878554884)
