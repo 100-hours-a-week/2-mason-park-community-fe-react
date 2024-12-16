@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {FaHeart, FaRegHeart} from "react-icons/fa";
 
 const S = {
     Wrapper: styled.div`
@@ -34,7 +35,6 @@ const S = {
     `,
     ContentContainer: styled.div`
         width: 550px;
-        min-height: 300px;
         
         display: flex;
         flex-direction: column;
@@ -58,7 +58,7 @@ const S = {
         font-size: 15px;
         line-height: 21px;
         text-align: start;
-        
+        min-height: 300px;
         margin: 10px 0;
     `,
     CountContainer: styled.div`
@@ -80,6 +80,20 @@ const S = {
         font-weight: 700;
         line-height: 35px;
         text-align: center;
+    `,
+    EmptyHeart: styled(FaRegHeart)`
+        color: #1ED760;
+        width: 30px;
+        height: 30px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    `,
+    FillHeart: styled(FaHeart)`
+        color: #1ED760;
+        width: 30px;
+        height: 30px;
+        margin-bottom: 10px;
+        cursor: pointer;
     `
 
 }

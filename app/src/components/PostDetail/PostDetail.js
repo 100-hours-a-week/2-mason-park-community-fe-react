@@ -6,6 +6,7 @@ import useModal from "../../hooks/useModal";
 import {convertToKUnit} from "../../utils/utils";
 import {useAtomValue} from "jotai";
 import {userAtom} from "../../store/atoms";
+import useThumbsUp from "../../hooks/useThumbsUp";
 
 const PostDetail = ({
     post_id,
@@ -16,13 +17,14 @@ const PostDetail = ({
     view_count,
     comment_count,
     created_at,
+    is_thumbs,
     user
 }) => {
     const navigate = useNavigate();
-
     // 모달
     const {openModal} = useModal();
-
+    // 좋아요
+    const {thumbs, thumbsUp, thumbsDown} = useThumbsUp(is_thumbs);
     // 현재 로그인 유저 정보
     const me = useAtomValue(userAtom);
     return (
@@ -48,6 +50,7 @@ const PostDetail = ({
                     <S.CountBox>{convertToKUnit(view_count)}<br/>조회수</S.CountBox>
                     <S.CountBox>{convertToKUnit(comment_count)}<br/>댓글</S.CountBox>
                 </S.CountContainer>
+                {thumbs ? (<S.FillHeart onClick={thumbsDown}/>) : (<S.EmptyHeart onClick={thumbsUp}/>)}
             </S.ContentContainer>
         </S.Wrapper>
     )

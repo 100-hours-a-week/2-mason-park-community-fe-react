@@ -5,6 +5,9 @@ export const createPostRequest = async (data) => {
         method: "POST",
         url: "http://localhost:8080/api/posts",
         data: data,
+        headers: {
+            'Content-Type': 'application/json',
+        },
         withCredentials: true
     })
 }
@@ -51,6 +54,31 @@ export const updatePostRequest = async (postId, data) => {
         method: "PATCH",
         url: `http://localhost:8080/api/posts/${postId}`,
         data: data,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        withCredentials: true
+    })
+}
+
+export const postThumbsUpRequest = async (postId) => {
+    return await axios.request({
+        method: "POST",
+        url: `http://localhost:8080/api/posts/${postId}/thumbs`,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        withCredentials: true
+    })
+}
+
+export const postThumbsDownRequest = async (postId) => {
+    return await axios.request({
+        method: "DELETE",
+        url: `http://localhost:8080/api/posts/${postId}/thumbs`,
+        headers: {
+            'Content-Type': 'application/json',
+        },
         withCredentials: true
     })
 }
