@@ -28,6 +28,7 @@ KTB 클라우드 교육 과정에서 과제로 진행하는 커뮤니티 입니�
     <img src="https://img.shields.io/badge/node.js-6DB33F?style=for-the-badge&logo=node.js&logoColor=white">
     <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
     <img src="https://img.shields.io/badge/StyledComponents-DB7093?style=for-the-badge&logo=StyledComponents&logoColor=white">
+    <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
     <img src="https://img.shields.io/badge/jotai-ffffff?style=for-the-badge&logo=jotai&logoColor=white">
 </div>
 
