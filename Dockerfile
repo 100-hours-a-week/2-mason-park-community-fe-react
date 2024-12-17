@@ -1,5 +1,5 @@
 # Stage 1: React 빌드
-FROM node:18 AS react
+FROM node:18-slim AS react
 
 # 작업 디렉토리 설정
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY app/package.json app/package-lock.json ./
 
 # 종속성 설치
-RUN npm install --legacy-peer-deps
+RUN npm install --legacy-peer-deps && npm cache clean --force
 # '--legacy-peer-deps': peerDependencies 충돌을 무시하고 설치
 # node_modules 디렉토리가 생성되고 종속성이 설치
 
@@ -21,7 +21,7 @@ RUN npm run build --prefix ./
 # 결과: 빌드된 정적 파일이 '/app/build' 디렉토리에 생성
 
 # Stage 2: Express 서버
-FROM node:18
+FROM node:18-slim
 
 WORKDIR /client
 
@@ -29,7 +29,7 @@ WORKDIR /client
 COPY server/package.json server/package-lock.json ./
 
 # 종속성 설치
-RUN npm install --only=production
+RUN npm install --only=production && npm cache clean --force
 
 # 소스 코드 복사
 COPY server/app.js ./app.js
