@@ -1,62 +1,44 @@
-import axios from "axios";
+import {client} from "./client";
 
 export const loginRequest = async (data) => {
-    return await axios.request({
+    return await client.request({
         method: "POST",
-        url: "http://localhost:8080/api/auth/login",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        withCredentials: true,
-        data: data,
+        url: `/auth/login`,
+        data: data
     })
 }
 
 export const logoutRequest = async () => {
-    return await axios.request({
+    return await client.request({
         method: "POST",
-        url: "http://localhost:8080/api/auth/logout",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        withCredentials: true,
+        url: `/auth/logout`,
     })
 }
 
 export const registerRequest = async (data) => {
-    return await axios.request({
-        method: 'POST',
-        url: `http://localhost:8080/api/auth/register`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: data,
-        withCredentials: true
+    return await client.request({
+        method: "POST",
+        url: `/auth/register`,
+        data: data
     })
 }
 
-export const existEmail = async (data) => {
-    return await axios.request({
-        method: 'GET',
-        url: `http://localhost:8080/api/auth/emails/exist`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
+export const existEmail = async (email) => {
+    return await client.request({
+        method: "GET",
+        url: `auth/emails/exist`,
         params: {
-            email: data
+            email: email
         }
-    });
+    })
 }
 
-export const existNickname = async (data) => {
-    return await axios.request({
-        method: 'GET',
-        url: `http://localhost:8080/api/auth/nicknames/exist`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
+export const existNickname = async (nickname) => {
+    return await client.request({
+        method: "GET",
+        url: `auth/nicknames/exist`,
         params: {
-            nickname: data
+            nickname: nickname,
         }
     })
 }

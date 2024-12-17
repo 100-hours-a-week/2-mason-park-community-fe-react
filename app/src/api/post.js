@@ -1,25 +1,18 @@
 import axios from "axios";
+import {client} from "./client";
 
 export const createPostRequest = async (data) => {
-    return await axios.request({
+    return await client.request({
         method: "POST",
-        url: "http://localhost:8080/api/posts",
-        data: data,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true
+        url: `/posts`,
+        data: data
     })
 }
 
 export const getPostsRequest = async (offset, limit=5) => {
-    return await axios.request({
+    return await client.request({
         method: "GET",
-        url: "http://localhost:8080/api/posts",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true,
+        url: `/posts`,
         params: {
             offset: offset,
             limit: limit
@@ -28,57 +21,37 @@ export const getPostsRequest = async (offset, limit=5) => {
 }
 
 export const getPostRequest = async (postId) => {
-    return await axios.request({
+    return await client.request({
         method: "GET",
-        url: `http://localhost:8080/api/posts/${postId}`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true
+        url: `/posts/${postId}`
     })
 }
 
 export const deletePostRequest = async (postId) => {
-    return await axios.request({
+    return await client.request({
         method: "DELETE",
-        url: `http://localhost:8080/api/posts/${postId}`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true
+        url: `/posts/${postId}`
     })
 }
 
 export const updatePostRequest = async (postId, data) => {
-    return await axios.request({
+    return await client.request({
         method: "PATCH",
-        url: `http://localhost:8080/api/posts/${postId}`,
-        data: data,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true
+        url: `/posts/${postId}`,
+        data: data
     })
 }
 
 export const postThumbsUpRequest = async (postId) => {
-    return await axios.request({
+    return await client.request({
         method: "POST",
-        url: `http://localhost:8080/api/posts/${postId}/thumbs`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true
+        url: `/posts/${postId}/thumbs`
     })
 }
 
 export const postThumbsDownRequest = async (postId) => {
-    return await axios.request({
+    return await client.request({
         method: "DELETE",
-        url: `http://localhost:8080/api/posts/${postId}/thumbs`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true
+        url: `/posts/${postId}/thumbs`
     })
 }
