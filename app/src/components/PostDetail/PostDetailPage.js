@@ -15,7 +15,7 @@ const PostDetailPage = () => {
 
     useEffect(() => {
         setHeader({
-            back: 1,
+            back: 2,
             profile: true
         })
     }, [])
