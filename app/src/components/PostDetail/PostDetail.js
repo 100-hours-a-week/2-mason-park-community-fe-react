@@ -24,7 +24,7 @@ const PostDetail = ({
     // 모달
     const {openModal} = useModal();
     // 좋아요
-    const {thumbs, thumbsUp, thumbsDown} = useThumbsUp(is_thumbs);
+    const {thumbs, thumbCount, thumbsUp, thumbsDown} = useThumbsUp(is_thumbs, thumb_count);
     // 현재 로그인 유저 정보
     const me = useAtomValue(userAtom);
     return (
@@ -46,7 +46,7 @@ const PostDetail = ({
                 {post_image && (<S.ContentImage src={post_image}/>)}
                 <S.ContentText>{content}</S.ContentText>
                 <S.CountContainer>
-                    <S.CountBox>{convertToKUnit(thumb_count)}<br/>좋아요 수</S.CountBox>
+                    <S.CountBox>{convertToKUnit(thumbCount)}<br/>좋아요 수</S.CountBox>
                     <S.CountBox>{convertToKUnit(view_count)}<br/>조회수</S.CountBox>
                     <S.CountBox>{convertToKUnit(comment_count)}<br/>댓글</S.CountBox>
                 </S.CountContainer>
