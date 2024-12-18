@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {FaXmark} from "react-icons/fa6";
 
 const S = {
     Wrapper: styled.div`
@@ -31,12 +32,22 @@ const S = {
         text-align: center;
         
         margin: 5px 0;
+        cursor: pointer;
     `,
     InputFilename: styled.span`
+        width: 250px;
         font-size: 14px;
         color: white;
         font-weight: 700;
         margin-left: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    `,
+    CancelButton: styled(FaXmark)`
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
     `,
     Input: styled.input`
         display: none;

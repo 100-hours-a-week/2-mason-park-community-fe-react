@@ -35,10 +35,15 @@ const PostForm = ({post_id, title, content}) => {
         }
     }
 
+    const uploadCancel = (e, setFilename) => {
+        setFilename(prev => '');
+        setImage(prev => '');
+    }
+
     const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
         initialValues: {
-            title: title,
-            content: content
+            title: title ? title: '',
+            content: content ? content: ''
         },
         validate: values => {
 
@@ -74,7 +79,7 @@ const PostForm = ({post_id, title, content}) => {
             else if (!validator.postContent(values.content)) {
                 values.content = values.content.substring(0, 1500);
                 setErrors((prev) => {
-                    return {...prev, error: error.PASSWORD_INVALID }
+                    return {...prev, error: error.CONTENT_EXCEED_MAX_LEN}
                 });
             }
             // 내용 유효성 검사 : 통과
@@ -127,7 +132,9 @@ const PostForm = ({post_id, title, content}) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
+                <S.TextCount>({values.title.length} / 26)</S.TextCount>
             </S.TextInputWrapper>
+
             <S.TextAreaWrapper>
                 <ContentInput
                     title={"내용"}
@@ -136,6 +143,7 @@ const PostForm = ({post_id, title, content}) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
+                <S.TextCount>({values.content.length} / 1500)</S.TextCount>
                 <HelperMessage touched={touched.title || touched.content} error={errors.error} />
             </S.TextAreaWrapper>
             <S.FileInputWrapper>
@@ -143,6 +151,7 @@ const PostForm = ({post_id, title, content}) => {
                     title={"이미지"}
                     name={"postImage"}
                     onChange={handleImage}
+                    uploadCancel={uploadCancel}
                 />
             </S.FileInputWrapper>
             <FormButton title={post_id ? "수정하기" : "완료"} disabled={disabled} onClick={handleSubmit}/>

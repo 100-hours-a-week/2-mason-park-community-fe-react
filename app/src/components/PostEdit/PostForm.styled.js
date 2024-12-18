@@ -18,6 +18,9 @@ const S = {
         display: flex;
         flex-direction: column;
     `,
+    TextCount: styled.div`
+        text-align: right;
+    `,
     TextAreaWrapper: styled.div`
         width: 360px;
         min-height: 340px;

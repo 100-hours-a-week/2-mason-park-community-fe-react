@@ -1,7 +1,7 @@
 import S from './FileInput.styled'
 import {useState} from "react";
 
-const FileInput = ({title, name, type="file", onChange}) => {
+const FileInput = ({title, name, type="file", onChange, uploadCancel}) => {
     const [filename, setFilename] = useState();
     return (
         <S.Wrapper>
@@ -9,6 +9,7 @@ const FileInput = ({title, name, type="file", onChange}) => {
             <S.InputWrapper>
                 <S.InputButton htmlFor={'file'}>파일 찾기</S.InputButton>
                 <S.InputFilename>{filename}</S.InputFilename>
+                {filename && <S.CancelButton onClick={(e) => {uploadCancel(e, setFilename)}}/>}
                 <S.Input
                     id={'file'}
                     name={name}
