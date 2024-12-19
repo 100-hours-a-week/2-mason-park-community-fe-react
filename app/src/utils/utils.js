@@ -31,8 +31,9 @@ export const error = {
     "PROFILE_IMG_BLANK" : "* 프로필 사진을 추가해주세요.",
     "TITLE_CONTENT_BLANK" : "* 제목, 내용을 모두 작성해주세요.",
     "TITLE_EXCEED_MAX_LEN" : "* 제목은 최대 26자 까지 작성 가능합니다.",
-    "CONTENT_EXCEED_MAX_LEN" : "* 제목은 최대 1500자 까지 작성 가능합니다.",
-    "COMMENT_CONTENT_BLANK" : "* 내용을 입력해주세요.",
+    "CONTENT_EXCEED_MAX_LEN" : "* 내용은 최대 1500자 까지 작성 가능합니다.",
+    "COMMENT_CONTENT_EXCEED_MAX_LEN" : "* 내용은 최대 500자 까지 작성 가능합니다.",
+    "CONTENT_BLANK" : "* 내용을 입력해주세요.",
 }
 
 export const validator = {
@@ -55,6 +56,12 @@ export const validator = {
     },
     postContent(value) {
         return 0 <= value.length && value.length <= 1500;
+    },
+    commentContent(value) {
+        return 0 <= value.length && value.length <= 500;
+    },
+    whiteSpace(value) {
+        return value.trim() === '';
     }
 }
 

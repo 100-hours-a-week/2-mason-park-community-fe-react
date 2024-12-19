@@ -1,5 +1,5 @@
 import S from './CommentForm.styled'
-import {error} from "../../utils/utils";
+import {error, validator} from "../../utils/utils";
 import useForm from "../../hooks/useForm";
 import {useAtom} from "jotai";
 import {changeAtom, commentAtom, commonErrorAtom as errorAtom} from "../../store/atoms";
@@ -16,7 +16,7 @@ const CommentForm = () => {
     const [comment, setComment] = useAtom(commentAtom);
     const [isChange, setIsChange] = useAtom(changeAtom);
 
-    const { values, disabled, handleChange, handleBlur, handleSubmit } = useForm({
+    const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
         initialValues: {
             content: "",
         },
@@ -25,8 +25,18 @@ const CommentForm = () => {
             // 내용 유효성 검사 : 입력
             if (!values.content) {
                 setErrors((prev) => {
-                    return {...prev, error: error.COMMENT_CONTENT_BLANK}
+                    return {...prev, error: error.CONTENT_BLANK}
                 });
+            } else if (validator.whiteSpace(values.content)) {
+                setErrors((prev) => {
+                    return {...prev, error: error.CONTENT_BLANK}
+                })
+            } else if (!validator.commentContent(values.content)) {
+                inputRef.current.value = values.content.substring(0, 500);
+                values.content = values.content.substring(0, 500);
+                setErrors((prev) => {
+                    return {...prev, error: error.COMMENT_CONTENT_EXCEED_MAX_LEN}
+                })
             } else {
                 setErrors((prev) => {
                     return {...prev, error: error.BLANK}
@@ -45,9 +55,10 @@ const CommentForm = () => {
                 }
 
                 // 입력값 초기화
-                inputRef.current.value = '';
-                setComment(prev => ({ ...prev, comment_id: '', content: '' }));
+                values.content = '';
+                setComment(prev => ({comment_id: '', content: ''}))
                 setIsChange(prev => true);
+                return values;
             } catch (e) {
                 console.error(`${e.response.data.error} : ${e.response.data.message}`);
                 setErrors((prev) => {
@@ -60,6 +71,7 @@ const CommentForm = () => {
     // 수정 버튼 눌렀을 때 입력 폼
     useEffect(() => {
         inputRef.current.value = comment.content;
+        values.content = comment.content;
         inputRef.current.scrollIntoView({
             block: 'center',
             inline: 'center'
@@ -70,10 +82,12 @@ const CommentForm = () => {
         <S.Wrapper>
             <CommentInput
                 name={"content"}
+                value={values.content}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 ref={inputRef}
             />
+            <S.TextCount>({values.content.length} / 500)</S.TextCount>
             <CommonButton title={comment.comment_id ? "댓글 수정" : "댓글 등록"} disabled={disabled} handler={handleSubmit}/>
         </S.Wrapper>
     )

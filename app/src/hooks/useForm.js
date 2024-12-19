@@ -25,6 +25,8 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (disabled) return;
+
         // 모든 필드에 방문표시
         setTouched(
             Object.keys(values).reduce((touched, field) => {
@@ -34,11 +36,21 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
         )
 
         const [filterValues, filterErrors] = await validate(values)
-        if (Object.values(filterErrors).some(v => v)) {
-            return;
-        }
 
-        await onSubmit(filterValues)
+        let isError = false;
+        Object.values(filterErrors).some(v => {
+            if (v) {
+                alert(v);
+                isError = true;
+            }
+        })
+        if (isError) return;
+
+        const submitValues = await onSubmit(filterValues);
+
+        setValues({
+            ...submitValues
+        });
     }
 
 

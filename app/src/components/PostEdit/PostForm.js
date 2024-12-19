@@ -53,6 +53,12 @@ const PostForm = ({post_id, title, content}) => {
                     return {...prev, error: error.TITLE_CONTENT_BLANK}
                 });
             }
+            // 공백 검사
+            else if (validator.whiteSpace(values.title)) {
+                setErrors((prev) => {
+                    return {...prev, error: error.TITLE_CONTENT_BLANK}
+                })
+            }
             // 제목 유효성 검사 : 길이
             else if (!validator.postTitle(values.title)) {
                 values.title = values.title.substring(0, 26);
@@ -67,13 +73,20 @@ const PostForm = ({post_id, title, content}) => {
                 });
             }
 
-            if (!values.title || !validator.postTitle(values.title)) return [values, errors];
+            if (!values.title || validator.whiteSpace(values.title) || !validator.postTitle(values.title))
+                return [values, errors];
 
             // 내용 유효성 검사 : 입력
             if (!values.content) {
                 setErrors((prev) => {
                     return {...prev, error: error.TITLE_CONTENT_BLANK }
                 });
+            }
+            // 공백 검사
+            else if (validator.whiteSpace(values.content)) {
+                setErrors((prev) => {
+                    return {...prev, error: error.TITLE_CONTENT_BLANK}
+                })
             }
             // 내용 유효성 검사 : 길이
             else if (!validator.postContent(values.content)) {

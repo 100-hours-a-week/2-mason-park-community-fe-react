@@ -32,6 +32,7 @@ const S = {
         min-height: 50px;
         display: flex;
         flex-direction: column;
+        margin: 5px 0;
     `
 }
 
