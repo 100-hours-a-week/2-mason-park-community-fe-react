@@ -9,8 +9,8 @@ import useComments from "../../hooks/useComments";
 import CommentItem from "../Comment/CommentItem";
 
 const PostDetailPage = () => {
-    const {post} = usePost();
-    const {comments, loading} = useComments();
+    const {post, setPost, postLoading} = usePost();
+    const {comments, setComments, commentLoading} = useComments();
     const setHeader = useSetAtom(headerAtom);
 
     useEffect(() => {
@@ -23,12 +23,12 @@ const PostDetailPage = () => {
     return (
         <>
             <S.Wrapper>
-                <PostDetail {...post} />
-                <CommentForm />
+                <PostDetail {...post} setPost={setPost} />
+                <CommentForm setPost={setPost} setComments={setComments} />
             </S.Wrapper>
             <S.CommentContainer>
-                {!loading && comments.map((comment) => (
-                    <CommentItem key={comment.comment_id} {...comment} />
+                {!commentLoading && comments.map((comment) => (
+                    <CommentItem key={comment.comment_id} {...comment} setPost={setPost} setComments={setComments} />
                 ))}
             </S.CommentContainer>
         </>

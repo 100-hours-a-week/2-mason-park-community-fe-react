@@ -22,14 +22,14 @@ const useModal = () => {
         })
     }, [setModal]);
 
-    const openModal = useCallback((type, id) => {
+    const openModal = useCallback((type, handler) => {
         blockScroll();
         setModal(prev => {
             return {
                 ...prev,
                 element: ModalType[type],
                 isOpen: true,
-                targetId: id
+                handler: handler
             }
         })
     }, [setModal]);

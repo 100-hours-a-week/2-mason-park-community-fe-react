@@ -1,13 +1,10 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getPostRequest} from "../api/post";
-import {useAtom} from "jotai/index";
-import {changeAtom} from "../store/atoms";
 
 const usePost = () => {
     const params = useParams();
 
-    const [isChange, setIsChange] = useAtom(changeAtom);
     const [loading, setLoading] = useState(false);
     const [post, setPost] = useState(null);
 
@@ -27,11 +24,11 @@ const usePost = () => {
 
     useEffect(() => {
         getPost();
-        setIsChange(false);
-    }, [isChange]);
+    }, []);
 
     return {
         post,
+        setPost,
         loading
     }
 }

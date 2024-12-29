@@ -1,21 +1,9 @@
 import S from './Modal.styled'
 import useModal from "../../hooks/useModal";
-import {useNavigate} from "react-router-dom";
-import {deletePostRequest} from "../../api/post";
 
 const PostDeleteModal = () => {
-    const navigate = useNavigate();
     const {modal, closeModal} = useModal();
-    const deletePost = async () => {
-        try {
-            await deletePostRequest(modal.targetId.post_id);
 
-            closeModal();
-            navigate("/");
-        } catch (e) {
-            console.error(`${e.response.data.error} : ${e.response.data.message}`);
-        }
-    }
     return(
         <>
             <S.Title>게시글을 삭제하시겠습니까?</S.Title>
@@ -24,7 +12,7 @@ const PostDeleteModal = () => {
                 <S.CancelButton onClick={closeModal}>
                     취소
                 </S.CancelButton>
-                <S.ConfirmButton onClick={deletePost}>
+                <S.ConfirmButton onClick={modal.handler}>
                     확인
                 </S.ConfirmButton>
             </S.ButtonWrapper>

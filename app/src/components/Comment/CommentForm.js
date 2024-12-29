@@ -9,7 +9,7 @@ import CommentInput from "../Input/CommentInput";
 import CommonButton from "../Button/CommonButton";
 import {useEffect, useRef} from "react";
 
-const CommentForm = () => {
+const CommentForm = ({setPost}) => {
     const params = useParams();
     const inputRef = useRef(null);
     const [errors, setErrors] = useAtom(errorAtom);
@@ -52,6 +52,7 @@ const CommentForm = () => {
                 } else {
                     const res = await createCommentRequest(params.post_id,values);
                     if (res.status !== 201) return;
+                    setPost(prev => ({...prev, comment_count: prev.comment_count + 1}))
                 }
 
                 // 입력값 초기화

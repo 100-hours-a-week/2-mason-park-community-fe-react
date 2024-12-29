@@ -41,7 +41,7 @@ export const registerErrorAtom = atom({
 export const modalAtom = atom({
     isOpen: false,
     element: null,
-    targetId: null,
+    handler: null
 })
 
 /* 댓글 상태 */

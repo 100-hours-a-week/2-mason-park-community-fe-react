@@ -9,15 +9,17 @@ import {existNickname} from "../../api/auth";
 import {error} from "../../utils/utils";
 import HelperMessage from "../common/HelperMessage";
 import FormButton from "../Button/FormButton";
-import {updateMyProfileRequest} from "../../api/user";
+import {updateMyProfileRequest, withdrawRequest} from "../../api/user";
 import {Slide, toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import useModal from "../../hooks/useModal";
+import {useNavigate} from "react-router-dom";
 
 const UserSettingForm = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useAtom(userAtom);
     const [errors, setErrors] = useAtom(errorAtom);
-    const {openModal} = useModal();
+    const {openModal, closeModal} = useModal();
     const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
         initialValues: {
             nickname: user.nickname
@@ -97,6 +99,18 @@ const UserSettingForm = () => {
             }
         }
     })
+
+    const withdraw = async () => {
+        try {
+            await withdrawRequest();
+
+            closeModal();
+            localStorage.clear();
+            navigate("/login");
+        } catch (e) {
+            console.error(`${e.response.data.error} : ${e.response.data.message}`);
+        }
+    }
     return(
         <>
             <S.Wrapper>
@@ -124,7 +138,7 @@ const UserSettingForm = () => {
                     disabled={disabled}
                     onClick={handleSubmit}
                 />
-                <S.Link onClick={() => openModal('withdraw')}>회원 탈퇴</S.Link>
+                <S.Link onClick={() => openModal('withdraw', withdraw)}>회원 탈퇴</S.Link>
                 <ToastContainer/>
             </S.Wrapper>
         </>
