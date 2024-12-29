@@ -34,9 +34,6 @@ RUN npm install --only=production && npm cache clean --force
 # 소스 코드 복사
 COPY server/app.js ./app.js
 
-# 환경 변수 복사
-COPY server/.env ./.env
-
 # React 빌드 파일 복사
 COPY --from=react /app/build ./build
 

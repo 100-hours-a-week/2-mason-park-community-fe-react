@@ -9,7 +9,7 @@ const usePost = () => {
 
     const [isChange, setIsChange] = useAtom(changeAtom);
     const [loading, setLoading] = useState(false);
-    const [post, setPost] = useState({});
+    const [post, setPost] = useState(null);
 
     const getPost = async () => {
         try {
