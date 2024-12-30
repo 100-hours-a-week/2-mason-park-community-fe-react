@@ -92,7 +92,7 @@ const LoginForm = () => {
                 <TextInput
                     title={"이메일"}
                     name={"email"}
-                    value={values.email}
+                    value={values.email || ''}
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
@@ -102,7 +102,7 @@ const LoginForm = () => {
                     type={"password"}
                     title={"비밀번호"}
                     name={"password"}
-                    value={values.password}
+                    value={values.password || ''}
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />

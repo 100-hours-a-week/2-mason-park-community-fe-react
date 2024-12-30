@@ -40,7 +40,6 @@ const useForm = ({ initialValues, validate, onSubmit}) => {
         let isError = false;
         Object.values(filterErrors).some(v => {
             if (v) {
-                alert(v);
                 isError = true;
             }
         })
