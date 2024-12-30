@@ -88,7 +88,7 @@ const CommentForm = ({setPost}) => {
                 onBlur={handleBlur}
                 ref={inputRef}
             />
-            <S.TextCount>({values.content.length} / 500)</S.TextCount>
+            <S.TextCount>({values.content?.length} / 500)</S.TextCount>
             <CommonButton title={comment.comment_id ? "댓글 수정" : "댓글 등록"} disabled={disabled} handler={handleSubmit}/>
         </S.Wrapper>
     )

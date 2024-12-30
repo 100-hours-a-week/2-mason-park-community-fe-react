@@ -145,7 +145,7 @@ const PostForm = ({post_id, title, content}) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
-                <S.TextCount>({values.title.length} / 26)</S.TextCount>
+                <S.TextCount>({values.title?.length} / 26)</S.TextCount>
             </S.TextInputWrapper>
 
             <S.TextAreaWrapper>
@@ -156,7 +156,7 @@ const PostForm = ({post_id, title, content}) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
-                <S.TextCount>({values.content.length} / 1500)</S.TextCount>
+                <S.TextCount>({values.content?.length} / 1500)</S.TextCount>
                 <HelperMessage touched={touched.title || touched.content} error={errors.error} />
             </S.TextAreaWrapper>
             <S.FileInputWrapper>
