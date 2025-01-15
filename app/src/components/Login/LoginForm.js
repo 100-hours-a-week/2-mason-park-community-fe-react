@@ -1,73 +1,42 @@
 import S from './LoginForm.styled'
-import TextInput from "../Input/TextInput";
 import FormButton from "../Button/FormButton";
 import {useNavigate} from "react-router-dom";
-import {error, validator} from "../../utils/utils";
-import useForm from "../../hooks/useForm";
+import {error} from "../../utils/utils";
 import HelperMessage from "../common/HelperMessage";
-import {useAtom, useSetAtom} from "jotai";
+import {useSetAtom} from "jotai";
 import {loginRequest} from "../../api/auth";
 import {getMyProfileRequest} from "../../api/user";
-import {userAtom, commonErrorAtom as errorAtom} from "../../store/atoms";
+import {userAtom} from "../../store/atoms";
+import {useFormik} from "formik";
+import * as Yup from "yup";
 
 const LoginForm = () => {
     const navigate = useNavigate();
-    const [errors, setErrors] = useAtom(errorAtom);
-    const setUser= useSetAtom(userAtom);
-    const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
+    const formik = useFormik({
         initialValues: {
             email: "",
-            password: "",
+            password: ""
         },
-        validate:  values => {
+        validationSchema: Yup.object({
+            email: Yup.string()
+                .email(error.EMAIL_INVALID)
+                .required(error.EMAIL_BLANK),
 
-            // 이메일 유효성 검사 : 입력
-            if (!values.email) {
-                setErrors((prev) => {
-                    return {...prev, error: error.EMAIL_BLANK}
-                });
-            }
-            // 이메일 유효성 검사 : 정규식
-            else if (!validator.email(values.email)) {
-                setErrors((prev) => {
-                    return {...prev, error: error.EMAIL_INVALID }
-                });
-            }
-            // 이메일 유효성 검사 : 중복
-            else {
-                setErrors((prev) => {
-                    return {...prev, error: error.BLANK }
-                });
-            }
-
-            if (!values.email || !validator.email(values.email)) return [values, errors];
-
-            // 비밀번호 유효성 검사 : 입력
-            if (!values.password) {
-                setErrors((prev) => {
-                    return {...prev, error: error.PASSWORD_BLANK }
-                });
-            }
-            // 비밀번호 유효성 검사 : 정규식
-            else if (!validator.password(values.password)) {
-                setErrors((prev) => {
-                    return {...prev, error: error.PASSWORD_INVALID }
-                });
-            }
-            // 비밀번호 유효성 검사 : 통과
-            else {
-                setErrors((prev) => {
-                    return {...prev, error: error.BLANK }
-                });
-            }
-
-            return [values, errors];
-        },
-        onSubmit: async values => {
+            password: Yup.string()
+                .required(error.PASSWORD_BLANK)
+                .min(8, error.PASSWORD_INVALID_MIN_LEN)
+                .max(20, error.PASSWORD_INVALID_MAX_LEN)
+                .matches(
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?])[A-Za-z\d!@#$%^&*?]{8,20}$/,
+                    error.PASSWORD_INVALID
+                )
+        }),
+        onSubmit: async (values) => {
+            alert(JSON.stringify(values, null, 2));
             try {
                 const loginRes = await loginRequest({
                     ...values,
-                    password: window.btoa(values.password)
+                    password: window.btoa(values.password) // base64 인코딩
                 })
 
                 if (loginRes.status !== 200) return;
@@ -79,37 +48,45 @@ const LoginForm = () => {
                 navigate('/');
             } catch (e) {
                 console.error(`${e.response.data.error} : ${e.response.data.message}`);
-                setErrors((prev) => {
-                    return {...prev, error: e.response.data.message }
-                });
             }
         }
     })
+    const setUser = useSetAtom(userAtom);
+
     return (
         <S.Wrapper>
             <S.Title>로그인</S.Title>
             <S.TextInputWrapper>
-                <TextInput
-                    title={"이메일"}
-                    name={"email"}
-                    value={values.email || ''}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                />
+                <S.InputWrapper>
+                    <S.Label>{"이메일"}</S.Label>
+                    <S.Input
+                        id={"email"}
+                        name={"email"}
+                        type={"text"}
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                </S.InputWrapper>
             </S.TextInputWrapper>
             <S.TextInputWrapper>
-                <TextInput
-                    type={"password"}
-                    title={"비밀번호"}
-                    name={"password"}
-                    value={values.password || ''}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                />
-                <HelperMessage touched={touched.email || touched.password} error={errors.error} />
+                <S.InputWrapper>
+                    <S.Label>{"비밀번호"}</S.Label>
+                    <S.Input
+                        id={"password"}
+                        name={"password"}
+                        type={"password"}
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                </S.InputWrapper>
+                <HelperMessage
+                    touched={formik.touched.email || formik.touched.password}
+                    error={formik.errors.email || formik.errors.password} />
             </S.TextInputWrapper>
 
-            <FormButton title={"로그인"} disabled={disabled} onClick={handleSubmit}/>
+            <FormButton title={"로그인"} disabled={!formik.isValid} onClick={formik.handleSubmit}/>
             <S.Link onClick={() => {navigate('/register')}}>회원가입</S.Link>
         </S.Wrapper>
     )
