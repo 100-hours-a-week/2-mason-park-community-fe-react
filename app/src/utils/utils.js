@@ -37,6 +37,7 @@ export const error = {
     "CONTENT_EXCEED_MAX_LEN" : "* 내용은 최대 1500자 까지 작성 가능합니다.",
     "COMMENT_CONTENT_EXCEED_MAX_LEN" : "* 내용은 최대 500자 까지 작성 가능합니다.",
     "CONTENT_BLANK" : "* 내용을 입력해주세요.",
+    "NOT_WHITE_SPACE_ONLY" : "*공백만 입력은 허용되지 않습니다."
 }
 
 export const validator = {

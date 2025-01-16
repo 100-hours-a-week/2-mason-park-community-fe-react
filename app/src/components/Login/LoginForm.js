@@ -46,6 +46,7 @@ const LoginForm = () => {
                 setUser(meRes.data.data);
                 navigate('/');
             } catch (e) {
+                alert(e.response.data.message);
                 console.error(`${e.response.data.error} : ${e.response.data.message}`);
             }
         }

@@ -14,7 +14,7 @@ const FileInput = ({title, name, type="file", onChange, uploadCancel}) => {
                     id={'file'}
                     name={name}
                     type={type}
-                    accept={'image/png, image/jpg, image/jpeg'}
+                    accept={'image/png, image/jpg, image/jpeg, image/gif'}
                     onChange={(e) => {onChange(e, setFilename)}}/>
             </S.InputWrapper>
         </S.Wrapper>

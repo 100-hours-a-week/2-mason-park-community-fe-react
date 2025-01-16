@@ -1,20 +1,17 @@
 import S from './PostForm.styled'
 import FormButton from "../Button/FormButton";
 import {useNavigate} from "react-router-dom";
-import {error, validator} from "../../utils/utils";
-import useForm from "../../hooks/useForm";
+import {error} from "../../utils/utils";
 import HelperMessage from "../common/HelperMessage";
-import {useAtom} from "jotai";
-import {commonErrorAtom as errorAtom} from "../../store/atoms";
-import TitleInput from "../Input/TitleInput";
-import ContentInput from "../Input/ContentInput";
 import FileInput from "../Input/FileInput";
 import {useState} from "react";
 import {createPostRequest, updatePostRequest} from "../../api/post";
+import {createPreSignedUrl, uploadImageToS3} from "../../api/common";
+import {useFormik} from "formik";
+import * as Yup from "yup";
 
 const PostForm = ({post_id, title, content}) => {
     const navigate = useNavigate();
-    const [errors, setErrors] = useAtom(errorAtom);
     const [image, setImage] = useState(null);
 
     const handleImage = (e, setFilename) => {
@@ -30,8 +27,20 @@ const PostForm = ({post_id, title, content}) => {
         setFilename(file.name);
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onloadend = (e) => {
-            setImage(reader.result);
+        reader.onloadend = async (e) => {
+            try {
+                const res = await createPreSignedUrl({
+                    filename: file.name,
+                    path: process.env.REACT_APP_S3_POST
+                });
+
+                if (res.status !== 201) return;
+
+                const result = await uploadImageToS3(res.data.data.preSignedUrl, file);
+                setImage(`${process.env.REACT_APP_CDN_URL}${res.data.data.key}`);
+            } catch (e) {
+                console.error(`${e.response.data.error} : ${e.response.data.message}`);
+            }
         }
     }
 
@@ -40,70 +49,35 @@ const PostForm = ({post_id, title, content}) => {
         setImage(prev => '');
     }
 
-    const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
+    const formik = useFormik({
         initialValues: {
             title: title ? title: '',
-            content: content ? content: ''
+            content: content ? content : ''
         },
-        validate: values => {
-
-            // 제목 유효성 검사 : 입력
-            if (!values.title) {
-                setErrors((prev) => {
-                    return {...prev, error: error.TITLE_CONTENT_BLANK}
-                });
-            }
-            // 공백 검사
-            else if (validator.whiteSpace(values.title)) {
-                setErrors((prev) => {
-                    return {...prev, error: error.TITLE_CONTENT_BLANK}
-                })
-            }
-            // 제목 유효성 검사 : 길이
-            else if (!validator.postTitle(values.title)) {
-                values.title = values.title.substring(0, 26);
-                setErrors((prev) => {
-                    return {...prev, error: error.TITLE_EXCEED_MAX_LEN }
-                });
-            }
-            // 제목 유효성 검사 : 통과
-            else {
-                setErrors((prev) => {
-                    return {...prev, error: error.BLANK }
-                });
-            }
-
-            if (!values.title || validator.whiteSpace(values.title) || !validator.postTitle(values.title))
-                return [values, errors];
-
-            // 내용 유효성 검사 : 입력
-            if (!values.content) {
-                setErrors((prev) => {
-                    return {...prev, error: error.TITLE_CONTENT_BLANK }
-                });
-            }
-            // 공백 검사
-            else if (validator.whiteSpace(values.content)) {
-                setErrors((prev) => {
-                    return {...prev, error: error.TITLE_CONTENT_BLANK}
-                })
-            }
-            // 내용 유효성 검사 : 길이
-            else if (!validator.postContent(values.content)) {
-                values.content = values.content.substring(0, 1500);
-                setErrors((prev) => {
-                    return {...prev, error: error.CONTENT_EXCEED_MAX_LEN}
-                });
-            }
-            // 내용 유효성 검사 : 통과
-            else {
-                setErrors((prev) => {
-                    return {...prev, error: error.BLANK }
-                });
-            }
-
-            return [values, errors];
-        },
+        validationSchema: Yup.object({
+            title: Yup.string()
+                .required(error.TITLE_CONTENT_BLANK)
+                .max(26, error.TITLE_EXCEED_MAX_LEN)
+                .test(
+                    'not-whitespace-only',
+                    error.NOT_WHITE_SPACE_ONLY,
+                    (value) => {
+                        if (!value) return false; // value가 비어있으면 에러
+                        return value.trim().length > 0; // 공백 제거 후 길이가 0보다 커야 함
+                    }
+                ),
+            content: Yup.string()
+                .required(error.CONTENT_BLANK)
+                .max(1500, error.CONTENT_EXCEED_MAX_LEN)
+                .test(
+                    'not-whitespace-only',
+                    error.NOT_WHITE_SPACE_ONLY,
+                    (value) => {
+                        if (!value) return false; // value가 비어있으면 에러
+                        return value.trim().length > 0; // 공백 제거 후 길이가 0보다 커야 함
+                    }
+                )
+        }),
         onSubmit: async values => {
             try {
 
@@ -128,9 +102,6 @@ const PostForm = ({post_id, title, content}) => {
                 }
             } catch (e) {
                 console.error(`${e.response.data.error} : ${e.response.data.message}`);
-                setErrors((prev) => {
-                    return {...prev, error: e.response.data.message }
-                });
             }
         }
     })
@@ -138,26 +109,35 @@ const PostForm = ({post_id, title, content}) => {
     return (
         <S.Wrapper>
             <S.TextInputWrapper>
-                <TitleInput
-                    title={"제목"}
-                    name={"title"}
-                    value={values.title}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                />
-                <S.TextCount>({values.title?.length} / 26)</S.TextCount>
+                <S.TitleWrapper>
+                    <S.TitleLabel>{"제목"}</S.TitleLabel>
+                    <S.TitleInput
+                        name={"title"}
+                        placeholder={"제목을 입력해주세요."}
+                        value={formik.values.title}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        maxLength={26}
+                    />
+                </S.TitleWrapper>
+                <S.TextCount>({formik.values.title.length} / 26)</S.TextCount>
             </S.TextInputWrapper>
 
             <S.TextAreaWrapper>
-                <ContentInput
-                    title={"내용"}
-                    name={"content"}
-                    value={values.content}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                />
-                <S.TextCount>({values.content?.length} / 1500)</S.TextCount>
-                <HelperMessage touched={touched.title || touched.content} error={errors.error} />
+                <S.ContentWrapper>
+                    <S.ContentLabel>{"내용"}</S.ContentLabel>
+                    <S.ContentTextarea
+                        name={"content"}
+                        placeholder={"내용을 입력해주세요."}
+                        value={formik.values.content}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        maxLength={1500}
+                    />
+                </S.ContentWrapper>
+                <S.TextCount>({formik.values.content.length} / 1500)</S.TextCount>
+                <HelperMessage touched={formik.touched.title || formik.touched.content}
+                               error={formik.errors.title || formik.errors.content} />
             </S.TextAreaWrapper>
             <S.FileInputWrapper>
                 <FileInput
@@ -167,7 +147,9 @@ const PostForm = ({post_id, title, content}) => {
                     uploadCancel={uploadCancel}
                 />
             </S.FileInputWrapper>
-            <FormButton title={post_id ? "수정하기" : "완료"} disabled={disabled} onClick={handleSubmit}/>
+            <FormButton title={post_id ? "수정하기" : "완료"}
+                        disabled={!formik.isValid}
+                        onClick={formik.handleSubmit}/>
         </S.Wrapper>
     )
 }
