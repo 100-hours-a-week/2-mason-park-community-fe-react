@@ -1,63 +1,32 @@
 import S from './UserPasswordForm.styled'
-import TextInput from "../Input/TextInput";
-import {useAtom} from "jotai";
-import {registerErrorAtom as errorAtom} from "../../store/atoms";
-import useForm from "../../hooks/useForm";
-import {error, validator} from "../../utils/utils";
+import {error} from "../../utils/utils";
 import HelperMessage from "../common/HelperMessage";
 import FormButton from "../Button/FormButton";
 import {updatePasswordRequest} from "../../api/user";
 import {Slide, toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {useFormik} from "formik";
+import * as Yup from "yup";
 
 const UserPasswordForm = () => {
-    const [errors, setErrors] = useAtom(errorAtom);
-    const { values, touched, disabled, handleChange, handleBlur, handleSubmit } = useForm({
+    const formik = useFormik({
         initialValues: {
-            password: '',
-            passwordCheck: '',
+            password: "",
+            passwordCheck: ""
         },
-        validate: async values => {
-            // 비밀번호 유효성 검사 : 입력
-            if (!values.password) {
-                setErrors((prev) => {
-                    return {...prev, password: error.PASSWORD_BLANK }
-                });
-            }
-            // 비밀번호 유효성 검사 : 정규식
-            else if (!validator.password(values.password)) {
-                setErrors((prev) => {
-                    return {...prev, password: error.PASSWORD_INVALID }
-                });
-            }
-            // 비밀번호 유효성 검사 : 통과
-            else {
-                setErrors((prev) => {
-                    return {...prev, password: error.BLANK }
-                });
-            }
-
-            // 비밀번호 확인 유효성 검사 : 입력
-            if (!values.passwordCheck) {
-                setErrors((prev) => {
-                    return {...prev, passwordCheck: error.CHECK_PASSWORD_BLANK }
-                });
-            }
-            // 비밀번호 확인 유효성 검사 : 일치
-            else if (!validator.checkPassword(values.password, values.passwordCheck)) {
-                setErrors((prev) => {
-                    return  {...prev, passwordCheck: error.PASSWORD_NOT_MATCH }
-                });
-            }
-            // 비밀번호 확인 유효성 검사 : 통과
-            else {
-                setErrors((prev) => {
-                    return {...prev, passwordCheck: error.BLANK }
-                });
-            }
-
-            return [values, errors];
-        },
+        validationSchema: Yup.object({
+            password: Yup.string()
+                .required(error.PASSWORD_BLANK)
+                .min(8, error.PASSWORD_INVALID_MIN_LEN)
+                .max(20, error.PASSWORD_INVALID_MAX_LEN)
+                .matches(
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?])[A-Za-z\d!@#$%^&*?]{8,20}$/,
+                    error.PASSWORD_INVALID
+                ),
+            passwordCheck: Yup.string()
+                .required(error.CHECK_PASSWORD_BLANK)
+                .oneOf([Yup.ref('password')], error.PASSWORD_NOT_MATCH),
+        }),
         onSubmit: async values => {
             try {
                 const data = {
@@ -86,39 +55,46 @@ const UserPasswordForm = () => {
                 console.error(`${e.response.data.error} : ${e.response.data.message}`);
             }
         }
-    })
+    });
     return(
         <>
             <S.Wrapper>
                 <S.Title>비밀번호 수정</S.Title>
 
                 <S.TextInputWrapper>
-                    <TextInput
-                        type={"password"}
-                        title={"비밀번호"}
-                        name={"password"}
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    <HelperMessage touched={touched.password} error={errors.password} />
+                    <S.InputWrapper>
+                        <S.Label>{"비밀번호"}</S.Label>
+                        <S.Input
+                            id={"password"}
+                            name={"password"}
+                            type={"password"}
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                    </S.InputWrapper>
+                    <HelperMessage touched={formik.touched.password} error={formik.errors.password} />
                 </S.TextInputWrapper>
+
                 <S.TextInputWrapper>
-                    <TextInput
-                        type={"password"}
-                        title={"비밀번호 확인"}
-                        name={"passwordCheck"}
-                        value={values.passwordCheck}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                    />
-                    <HelperMessage touched={touched.passwordCheck} error={errors.passwordCheck} />
+                    <S.InputWrapper>
+                        <S.Label>{"비밀번호 확인"}</S.Label>
+                        <S.Input
+                            id={"passwordCheck"}
+                            name={"passwordCheck"}
+                            type={"password"}
+                            value={formik.values.passwordCheck}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        />
+                    </S.InputWrapper>
+                    <HelperMessage touched={formik.touched.passwordCheck} error={formik.errors.passwordCheck} />
                 </S.TextInputWrapper>
 
                 <FormButton
                     title={"수정하기"}
-                    disabled={disabled}
-                    onClick={handleSubmit}
+                    disabled={!formik.isValid}
+                    onClick={formik.handleSubmit}
                 />
                 <ToastContainer/>
             </S.Wrapper>

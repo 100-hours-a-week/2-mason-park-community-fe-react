@@ -33,7 +33,7 @@ const RegisterForm = () => {
                 ),
             passwordCheck: Yup.string()
                 .required(error.CHECK_PASSWORD_BLANK)
-                .oneOf([Yup.ref('password'), error.PASSWORD_NOT_MATCH]),
+                .oneOf([Yup.ref('password')], error.PASSWORD_NOT_MATCH),
             nickname: Yup.string()
                 .required(error.NICKNAME_BLANK)
                 .matches(
