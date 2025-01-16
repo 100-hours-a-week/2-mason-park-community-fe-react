@@ -29,6 +29,7 @@ export const error = {
     "NICKNAME_BLANK" : "* 닉네임을 입력해주세요.",
     "NICKNAME_EXIST" : "* 중복된 닉네임 입니다.",
     "NICKNAME_INCLUDE_SPACE" : "* 띄어쓰기를 없애주세요.",
+    "NICKNAME_INVALID" : "* 닉네임은 공백 없이 최대 10자 까지 작성 가능합니다.",
     "NICKNAME_EXCEED_MAX_LEN" : "* 닉네임은 최대 10자 까지 작성 가능합니다.",
     "PROFILE_IMG_BLANK" : "* 프로필 사진을 추가해주세요.",
     "TITLE_CONTENT_BLANK" : "* 제목, 내용을 모두 작성해주세요.",

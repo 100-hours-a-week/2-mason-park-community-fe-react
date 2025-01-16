@@ -4,6 +4,7 @@ import {useRef, useState} from "react";
 import {error} from "../../utils/utils";
 import {useAtomValue} from "jotai";
 import {userAtom} from "../../store/atoms";
+import {createPreSignedUrl, uploadImageToS3} from "../../api/common";
 
 const ImageInput = ({title, name, type="file"}) => {
     const user = useAtomValue(userAtom);
@@ -27,9 +28,22 @@ const ImageInput = ({title, name, type="file"}) => {
 
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onloadend = (e) => {
+        reader.onloadend = async (e) => {
             setImageUrl(reader.result);
-            localStorage.setItem('profileImage', reader.result);
+
+            try {
+                const res = await createPreSignedUrl({
+                    filename: file.name,
+                    path: process.env.REACT_APP_S3_USER
+                });
+
+                if (res.status !== 201) return;
+
+                const result = await uploadImageToS3(res.data.data.preSignedUrl, file);
+                localStorage.setItem('image', `${process.env.REACT_APP_CDN_URL}${res.data.data.key}`);
+            } catch (e) {
+                console.error(`${e.response.data.error} : ${e.response.data.message}`);
+            }
         }
     }
 

@@ -32,7 +32,6 @@ const LoginForm = () => {
                 )
         }),
         onSubmit: async (values) => {
-            alert(JSON.stringify(values, null, 2));
             try {
                 const loginRes = await loginRequest({
                     ...values,
