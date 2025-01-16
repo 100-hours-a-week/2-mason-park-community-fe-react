@@ -53,7 +53,7 @@ const ImageInput = ({title, name, type="file"}) => {
             { !imageUrl && <SC.Helper>{error.PROFILE_IMG_BLANK}</SC.Helper>}
             <S.ImageBox onClick={openInput}>
                 { imageUrl ? (<S.Image src={imageUrl} />) : (<S.NoImage/>)}
-                <S.Input name={name} type={type} accept={'image/png, image/jpg, image/jpeg'} ref={fileInputRef} onChange={addImage} />
+                <S.Input name={name} type={type} accept={'image/png, image/jpg, image/jpeg, image/gif'} ref={fileInputRef} onChange={addImage} />
             </S.ImageBox>
         </S.Wrapper>
     )

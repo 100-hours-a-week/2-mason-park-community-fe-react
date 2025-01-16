@@ -168,7 +168,7 @@ const RegisterForm = () => {
 
             <FormButton
                 title={"회원가입"}
-                disabled={formik.isValid}
+                disabled={!formik.isValid}
                 onClick={formik.handleSubmit}
             />
             <S.Link onClick={() => {navigate('/login')}}>로그인하러 가기</S.Link>

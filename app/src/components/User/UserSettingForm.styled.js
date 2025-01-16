@@ -42,6 +42,17 @@ const S = {
         cursor: pointer;
         margin: 5px 0;
     `,
+    InputWrapper: styled.div`
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    `,
+    Input: styled.input`
+        height: 33px;
+        border-radius: 4px;
+        padding: 0 10px;
+        margin-bottom: 5px;
+    `
 }
 
 export default S;
