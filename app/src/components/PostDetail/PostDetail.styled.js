@@ -53,6 +53,9 @@ const S = {
     `,
     ContentText: styled.span`
         width: 100%;
+
+        word-break: normal;
+        overflow-wrap: break-word;
         
         font-weight: 400;
         font-size: 15px;
