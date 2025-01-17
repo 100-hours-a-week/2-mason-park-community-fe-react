@@ -32,6 +32,9 @@ const S = {
     Content: styled.span`
         padding-left: 5px;
         
+        word-break: normal;
+        overflow-wrap: break-word;
+        
         font-weight: 400;
         font-size: 15px;
         line-height: 21px;
