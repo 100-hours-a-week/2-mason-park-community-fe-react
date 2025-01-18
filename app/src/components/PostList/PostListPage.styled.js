@@ -8,7 +8,8 @@ const S = {
         
         display: flex;
         flex-direction: column;
-
+        align-items: center;
+        
         background-color: #121212;
         border-radius: 12px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
