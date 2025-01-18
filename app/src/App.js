@@ -15,6 +15,7 @@ import PostDetailPage from "./components/PostDetail/PostDetailPage";
 import PostModifyPage from "./components/PostEdit/PostModifyPage";
 import AuthRoute from "./routes/AuthRoute";
 import React from "react";
+import NotFoundPage from "./components/common/NotFoundPage";
 
 function App() {
     const {modal} = useModal();
@@ -65,6 +66,11 @@ function App() {
                         <PostModifyPage />
                     </AuthRoute>
                 }/>
+
+                {/* 존재하지 않는 페이지 */}
+                <Route path={"*"} element={
+                    <NotFoundPage />
+                } />
             </Route>
           </Routes>
         </>
