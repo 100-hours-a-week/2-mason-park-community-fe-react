@@ -7,6 +7,7 @@ const Dropbox = ({isAuth}) => {
     const logout = async () => {
         try {
             await logoutRequest();
+            localStorage.clear();
             navigate("/login");
         } catch (e) {
             console.error(`${e.response.data.error} : ${e.response.data.message}`);
