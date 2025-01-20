@@ -23,6 +23,7 @@ export const error = {
     "PASSWORD_INVALID_MAX_LEN" : "* 비밀번호는 최대 20자 이하이어야 합니다.",
     "PASSWORD_INVALID" : "* 비밀번호는 대소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다.",
     "PASSWORD_NOT_MATCH" : "* 비밀번호가 다릅니다.",
+    "SECRET_KEY_BLANK" : "* 시크릿 키를 입력해주세요.",
     "FAILED_LOGIN" : "* 입력하신 계정 정보가 정확하지 않았습니다.",
     "FAILED_REGISTER" : "* 회원가입에 실패하였습니다.",
     "CHECK_PASSWORD_BLANK" : "* 비밀번호를 한번 더 입력해주세요",

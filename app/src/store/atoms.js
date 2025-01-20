@@ -9,6 +9,7 @@ const loadUserFromStorage = () => {
         email: '',
         nickname: '',
         profile_image: '',
+        role: 'ANONYMOUS',
         is_authenticated: false
     };
 }
@@ -24,18 +25,6 @@ const loadHeaderFromStorage = () => {
     }
 }
 export const headerAtom = atomWithStorage('header', loadHeaderFromStorage());
-
-/* 에러 전역 상태 */
-export const commonErrorAtom = atom({
-    error: ''
-})
-
-export const registerErrorAtom = atom({
-    email: '',
-    password: '',
-    passwordCheck: '',
-    nickname: '',
-})
 
 /* 모달 상태 */
 export const modalAtom = atom({

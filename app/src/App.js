@@ -16,6 +16,7 @@ import PostModifyPage from "./components/PostEdit/PostModifyPage";
 import AuthRoute from "./routes/AuthRoute";
 import React from "react";
 import NotFoundPage from "./components/common/NotFoundPage";
+import AdminLoginPage from "./components/Login/AdminLoginPage";
 
 function App() {
     const {modal} = useModal();
@@ -65,6 +66,16 @@ function App() {
                     <AuthRoute redirectUrl={'/login'}>
                         <PostModifyPage />
                     </AuthRoute>
+                }/>
+
+                {/* 어드민 로그인 페이지 */}
+                <Route path={"admin/login"} element={
+                    <AdminLoginPage />
+                }/>
+
+                {/* 어드민 페이지 */}
+                <Route path={"admin/home"} element={
+
                 }/>
 
                 {/* 존재하지 않는 페이지 */}
