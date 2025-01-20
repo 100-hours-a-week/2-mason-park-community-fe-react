@@ -42,6 +42,10 @@ const PostDetail = ({
     }
 
     const clickThumbsUp = () => {
+        if (!me.is_authenticated) {
+            alert('로그인이 필요한 기능입니다.');
+            return;
+        }
         thumbsUp();
         setPost(prev => ({
             ...prev,
@@ -49,6 +53,11 @@ const PostDetail = ({
         }));
     }
     const clickThumbsDown = () => {
+        if (!me.is_authenticated) {
+            alert('로그인이 필요한 기능입니다.');
+            return;
+        }
+
         thumbsDown();
         setPost(prev => ({
             ...prev,
