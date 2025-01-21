@@ -12,7 +12,6 @@ const AdminRoute = ({children, redirectUrl}) => {
         if (me.is_authenticated && me.role === 'ADMIN') {
             setSuccess(true);
         } else if (success === null) {
-            alert("로그인 후 이용 가능합니다.");
             setSuccess(false);
         }
     }, [me])

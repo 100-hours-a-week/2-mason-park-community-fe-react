@@ -5,11 +5,13 @@ import WithdrawModal from "../components/Modal/WithdrawModal";
 import {blockScroll, unblockScroll} from "../utils/utils";
 import PostDeleteModal from "../components/Modal/PostDeleteModal";
 import CommentDeleteModal from "../components/Modal/CommentDeleteModal";
+import UserDeleteModal from "../components/Modal/UserDeleteModal";
 
 const ModalType = {
     withdraw: <WithdrawModal />,
     deletePost: <PostDeleteModal />,
     deleteComment: <CommentDeleteModal />,
+    deleteUser: <UserDeleteModal />,
 }
 
 const useModal = () => {

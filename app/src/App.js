@@ -17,6 +17,8 @@ import AuthRoute from "./routes/AuthRoute";
 import React from "react";
 import NotFoundPage from "./components/common/NotFoundPage";
 import AdminLoginPage from "./components/Login/AdminLoginPage";
+import AdminHomePage from "./components/Admin/AdminHomePage";
+import AdminRoute from "./routes/AdminRoute";
 
 function App() {
     const {modal} = useModal();
@@ -75,7 +77,9 @@ function App() {
 
                 {/* 어드민 페이지 */}
                 <Route path={"admin/home"} element={
-
+                    <AdminRoute redirectUrl={'/admin/login'}>
+                        <AdminHomePage />
+                    </AdminRoute>
                 }/>
 
                 {/* 존재하지 않는 페이지 */}

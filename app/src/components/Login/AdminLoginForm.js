@@ -3,14 +3,15 @@ import FormButton from "../Button/FormButton";
 import {useNavigate} from "react-router-dom";
 import {error} from "../../utils/utils";
 import HelperMessage from "../common/HelperMessage";
-import {useSetAtom} from "jotai";
 import {getMyProfileRequest} from "../../api/user";
 import {userAtom} from "../../store/atoms";
 import {useFormik} from "formik";
 import * as Yup from "yup";
 import {adminLoginRequest} from "../../api/admin";
+import {useAtom} from "jotai";
 
 const AdminLoginForm = () => {
+    const [me, setMe] = useAtom(userAtom);
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
@@ -20,17 +21,10 @@ const AdminLoginForm = () => {
         },
         validationSchema: Yup.object({
             email: Yup.string()
-                .email(error.EMAIL_INVALID)
                 .required(error.EMAIL_BLANK),
 
             password: Yup.string()
-                .required(error.PASSWORD_BLANK)
-                .min(8, error.PASSWORD_INVALID_MIN_LEN)
-                .max(20, error.PASSWORD_INVALID_MAX_LEN)
-                .matches(
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?])[A-Za-z\d!@#$%^&*?]{8,20}$/,
-                    error.PASSWORD_INVALID
-                ),
+                .required(error.PASSWORD_BLANK),
 
             secretKey: Yup.string()
                 .required(error.SECRET_KEY_BLANK)
@@ -48,15 +42,14 @@ const AdminLoginForm = () => {
                 const meRes = await getMyProfileRequest();
                 if (meRes.status !== 200) return;
 
-                setUser(meRes.data.data);
-                navigate('/admin/main');
+                setMe(meRes.data.data);
+                navigate('/admin/home');
             } catch (e) {
                 alert(e.response.data.message);
                 console.error(`${e.response.data.error} : ${e.response.data.message}`);
             }
         }
     })
-    const setUser = useSetAtom(userAtom);
 
     return (
         <S.Wrapper>
