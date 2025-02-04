@@ -14,7 +14,7 @@ import useModal from "./hooks/useModal";
 import PostDetailPage from "./components/PostDetail/PostDetailPage";
 import PostModifyPage from "./components/PostEdit/PostModifyPage";
 import AuthRoute from "./routes/AuthRoute";
-import React from "react";
+import React, {useEffect} from "react";
 import NotFoundPage from "./components/common/NotFoundPage";
 import AdminLoginPage from "./components/Login/AdminLoginPage";
 import AdminHomePage from "./components/Admin/AdminHomePage";

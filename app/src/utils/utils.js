@@ -50,23 +50,8 @@ export const validator = {
         // 비밀번호는 8자 이상 / 20자 이하 / 대소문자, 숫자, 특수문자를 각각 최소 1개 포함
         return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?])[A-Za-z\d!@#$%^&*?]{8,20}$/.test(value);
     },
-    checkPassword(origin, check) {
-        return origin === check;
-    },
     nickname(value) {
         return /^[가-힣a-zA-Z0-9]{2,10}$/.test(value);
-    },
-    postTitle(value) {
-        return 0 <= value.length && value.length <= 26;
-    },
-    postContent(value) {
-        return 0 <= value.length && value.length <= 1500;
-    },
-    commentContent(value) {
-        return 0 <= value.length && value.length <= 500;
-    },
-    whiteSpace(value) {
-        return value.trim() === '';
     }
 }
 
@@ -100,4 +85,39 @@ export const unblockScroll = (className= 'stop-scrolling') => {
 
     document.body.style.removeProperty('--scrollbar-width');
     document.body.classList.remove(className);
+}
+
+export const timeAgo = (datetimeString) => {
+    // 한국 시간(KST, UTC+9) 기준으로 변환
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul" }));
+    const past = new Date(datetimeString + " UTC+9"); // KST로 해석
+
+    const diffInSeconds = Math.floor((now - past) / 1000);
+
+    if (diffInSeconds < 60) {
+        return `${diffInSeconds}초 전`;
+    }
+
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    if (diffInMinutes < 60) {
+        return `${diffInMinutes}분 전`;
+    }
+
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    if (diffInHours < 24) {
+        return `${diffInHours}시간 전`;
+    }
+
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays < 30) {
+        return `${diffInDays}일 전`;
+    }
+
+    const diffInMonths = Math.floor(diffInDays / 30);
+    if (diffInMonths < 12) {
+        return `${diffInMonths}개월 전`;
+    }
+
+    const diffInYears = Math.floor(diffInMonths / 12);
+    return `${diffInYears}년 전`;
 }

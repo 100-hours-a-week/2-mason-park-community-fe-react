@@ -6,12 +6,14 @@ import {blockScroll, unblockScroll} from "../utils/utils";
 import PostDeleteModal from "../components/Modal/PostDeleteModal";
 import CommentDeleteModal from "../components/Modal/CommentDeleteModal";
 import UserDeleteModal from "../components/Modal/UserDeleteModal";
+import NotificationDeleteModal from "../components/Modal/NotificationDeleteModal";
 
 const ModalType = {
     withdraw: <WithdrawModal />,
     deletePost: <PostDeleteModal />,
     deleteComment: <CommentDeleteModal />,
     deleteUser: <UserDeleteModal />,
+    deleteNotification: <NotificationDeleteModal />,
 }
 
 const useModal = () => {

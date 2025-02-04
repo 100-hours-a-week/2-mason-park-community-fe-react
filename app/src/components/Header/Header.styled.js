@@ -35,6 +35,11 @@ const S = {
         
         cursor: pointer;
     `,
+    ProfileWrapper: styled.div`
+        width: 100px;
+        display: flex;
+        justify-content: space-between;
+    `
 }
 
 export default S;

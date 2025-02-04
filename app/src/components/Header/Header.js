@@ -1,12 +1,13 @@
 import S from './Header.styled'
 import {useNavigate} from "react-router-dom";
 import {headerAtom, userAtom} from "../../store/atoms";
-import {useAtomValue} from "jotai";
+import {useAtom, useAtomValue} from "jotai";
 import ProfileImageWithDropbox from "../../HOC/withDropbox";
+import NotificationDropbox from "../Notification/NotificationDropbox";
 
 const Header = () => {
     const navigate = useNavigate();
-    const user = useAtomValue(userAtom);
+    const [me, setMe] = useAtom(userAtom);
     const header = useAtomValue(headerAtom);
 
     const clickBackBtn = () => {
@@ -34,10 +35,16 @@ const Header = () => {
             <S.Title onClick={() => {navigate('/')}}>
                 민수네 커뮤니티
             </S.Title>
-            {
-                header.profile &&
-                <ProfileImageWithDropbox imageUrl={user.profile_image} isAuth={user.is_authenticated}/>
-            }
+            <S.ProfileWrapper>
+                {
+                    header.profile &&
+                    <ProfileImageWithDropbox imageUrl={me.profile_image} isAuth={me.is_authenticated}/>
+                }
+                {
+                    me.is_authenticated &&
+                    <NotificationDropbox/>
+                }
+            </S.ProfileWrapper>
         </S.Wrapper>
     );
 }

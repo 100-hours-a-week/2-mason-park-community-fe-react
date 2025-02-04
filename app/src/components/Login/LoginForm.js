@@ -9,8 +9,11 @@ import {getMyProfileRequest} from "../../api/user";
 import {userAtom} from "../../store/atoms";
 import {useFormik} from "formik";
 import * as Yup from "yup";
+import {sseAtom} from "../../store/notification";
 
 const LoginForm = () => {
+    const setUser = useSetAtom(userAtom);
+    const initSSE = useSetAtom(sseAtom);
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
@@ -44,6 +47,7 @@ const LoginForm = () => {
                 if (meRes.status !== 200) return;
 
                 setUser(meRes.data.data);
+                initSSE();
                 navigate('/');
             } catch (e) {
                 alert(e.response.data.message);
@@ -51,7 +55,6 @@ const LoginForm = () => {
             }
         }
     })
-    const setUser = useSetAtom(userAtom);
 
     return (
         <S.Wrapper>
