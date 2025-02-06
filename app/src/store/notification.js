@@ -1,7 +1,47 @@
 import {atom} from "jotai";
+import {getUnreadNotificationsRequest} from "../api/notification";
 
 // 읽지 않은 알림 목록
 export const notificationAtom = atom([]);
+export const notificationOffsetAtom = atom(0);
+export const notificationHasNextPageAtom = atom(true);
+export const notificationIsFetchingAtom = atom(false);
+
+export const fetchNotifications = async (get, set) => {
+    const offset = get(notificationOffsetAtom);
+    const hasNextPage = get(notificationHasNextPageAtom);
+    const isFetching = get(notificationIsFetchingAtom);
+
+    if (!hasNextPage || isFetching) return; // 데이터가 없거나 요청 중이면 종료
+
+    set(notificationIsFetchingAtom, true); // 데이터 요청 시작
+
+    try {
+        const res = await getUnreadNotificationsRequest(offset, 10);
+
+        const newNotifications = res.data;
+
+        set(notificationAtom, (prevNotifications) =>
+            [...prevNotifications, ...newNotifications.data].sort(
+                (a, b) => new Date(b.created_at) - new Date(a.created_at)
+            )
+        );
+
+        set(notificationOffsetAtom, offset + 10); // 다음 오프셋 갱신
+        set(notificationHasNextPageAtom, newNotifications.offset + 10 < newNotifications.total); // 다음 페이지 존재 여부 갱신
+    } catch (e) {
+        console.error(`${e.response?.data?.error} : ${e.response?.data?.message}`);
+    } finally {
+        set(notificationIsFetchingAtom, false); // 데이터 요청 완료
+    }
+}
+
+// 초기 데이터 로딩을 위한 atom
+export const initialNotificationLoadAtom = atom(
+    null,
+    async (get, set) => {
+    await fetchNotifications(get, set);
+});
 
 // 읽지 않은 알림 개수
 export const unreadCountAtom = atom((get) =>
@@ -23,12 +63,8 @@ export const sseAtom = atom(
         });
 
         // SSE 연결 상태 체크
-        if (eventSource.readyState === EventSource.OPEN) {
+        eventSource.onopen = () => {
             console.log("SSE 연결 성공");
-        } else if (eventSource.readyState === EventSource.CONNECTING) {
-            console.log("SSE 연결 중...");
-        } else {
-            console.log("SSE 연결 종료");
         }
 
         // 이벤트 수신 핸들러

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {IoIosArrowBack} from "react-icons/io";
+import {IoIosArrowBack, IoIosNotifications} from "react-icons/io";
 
 const S = {
     Wrapper: styled.div`
@@ -39,6 +39,23 @@ const S = {
         width: 100px;
         display: flex;
         justify-content: space-between;
+    `,
+    Notification: styled(IoIosNotifications)`
+        width: 35px;
+        height: 35px;
+        
+        text-align: center;
+        cursor: pointer;
+    `,
+    New: styled.div`
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #4cd964;
+        border-radius: 50%;
+        
+        top: 55%;
+        left: 60%;
     `
 }
 

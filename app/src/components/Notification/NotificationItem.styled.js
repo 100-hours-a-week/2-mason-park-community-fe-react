@@ -9,18 +9,17 @@ const S = {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        
-        padding: 0 20px;
+        padding: 0 10px;
     `,
     Message: styled.div`
-        width: 250px;
+        width: 230px;
         word-break: normal;
         overflow-wrap: break-word;
         line-height: 20px;
         text-align: start;
     `,
     Time: styled.div`
-        width: 50px;
+        width: 70px;
         height: 100%;
     `,
     Check: styled(FaCheck)`

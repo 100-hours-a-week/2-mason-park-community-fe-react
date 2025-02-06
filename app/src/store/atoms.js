@@ -33,6 +33,9 @@ export const modalAtom = atom({
     handler: null
 })
 
+/* 알림창 상태 */
+export const notificationOpenAtom = atom(false);
+
 /* 댓글 상태 */
 export const commentAtom = atom({
     comment_id: '',
